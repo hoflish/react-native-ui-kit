@@ -2,7 +2,7 @@ import React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {Text, View, StyleSheet} from 'react-native';
 
-import Touchable from 'components/Touchable';
+import Touchable from 'react-native-platform-touchable';
 
 storiesOf('Touchable', module)
   .add('default', () => (
@@ -12,18 +12,15 @@ storiesOf('Touchable', module)
       </Touchable>
     </View>
   ))
-  .add(
-    'with background for borderless selectable elements [android]',
-    () => (
-      <View style={styles.wrapper}>
-        <Touchable
-          style={styles.custom}
-          background={Touchable.SelectableBackgroundBorderless()}>
-          <Text>touchable</Text>
-        </Touchable>
-      </View>
-    ),
-  )
+  .add('with background for borderless selectable elements [android]', () => (
+    <View style={styles.wrapper}>
+      <Touchable
+        style={styles.custom}
+        background={Touchable.SelectableBackgroundBorderless()}>
+        <Text>touchable</Text>
+      </Touchable>
+    </View>
+  ))
   .add('with ripple drawable with specified color', () => (
     <View style={styles.wrapper}>
       <Touchable

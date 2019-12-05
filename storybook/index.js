@@ -8,6 +8,8 @@ import {name as appName} from '../app.json';
 const loaderFn = () => [
   require('./stories/touchable.stories.js'),
   require('./stories/icon.stories.js'),
+  require('./stories/elevation.stories.js'),
+  require('./stories/button.stories.js'),
 ];
 
 configure(loaderFn, module);

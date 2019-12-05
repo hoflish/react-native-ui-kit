@@ -1,7 +1,8 @@
 import React from 'react';
 import {Text, Image} from 'react-native';
 import VectorIcons from 'react-native-vector-icons/MaterialIcons';
-import {DISPLAYNAME_PREFIX} from 'common/props';
+
+import {DISPLAYNAME_PREFIX} from 'common/types';
 
 export type IconSource = string | {uri: string} | number;
 
