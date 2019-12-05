@@ -1,13 +1,14 @@
 import React from 'react';
 import {ThemeProvider} from 'contexts/theme';
 import {View, StyleSheet} from 'react-native';
+import defaultTheme from 'common/defaultTheme';
 
 export default class Provider extends React.Component {
   render() {
-    const {children, theme} = this.props;
+    const {children, style} = this.props;
     return (
-      <ThemeProvider theme={theme}>
-        <View style={styles.wrapper}>{children}</View>
+      <ThemeProvider>
+        <View style={[styles.wrapper, style]}>{children}</View>
       </ThemeProvider>
     );
   }

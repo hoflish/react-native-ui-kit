@@ -6,10 +6,11 @@ import {name as appName} from '../app.json';
 
 // import stories
 const loaderFn = () => [
-  require('./stories/touchable.stories.js'),
-  require('./stories/icon.stories.js'),
-  require('./stories/elevation.stories.js'),
-  require('./stories/button.stories.js'),
+  //require('./stories/touchable.stories.js'),
+  //require('./stories/icon.stories.js'),
+  //require('./stories/elevation.stories.js'),
+  //require('./stories/button.stories.js'),
+  require('./stories/switch.stories.js'),
 ];
 
 configure(loaderFn, module);
