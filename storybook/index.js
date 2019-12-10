@@ -10,7 +10,9 @@ const loaderFn = () => [
   //require('./stories/icon.stories.js'),
   //require('./stories/elevation.stories.js'),
   //require('./stories/button.stories.js'),
-  require('./stories/switch.stories.js'),
+  //require('./stories/switch.stories.js'),
+  require('./stories/fab.stories.js'),
+  require('./stories/avatar.stories.js'),
 ];
 
 configure(loaderFn, module);
