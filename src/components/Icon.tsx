@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, Image} from 'react-native';
-import VectorIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {DISPLAYNAME_PREFIX} from 'common/types';
 
@@ -39,7 +39,7 @@ class Icon extends React.PureComponent<IIconProps> {
 
     if (typeof name === 'string') {
       return (
-        <VectorIcons name={name} color={color} size={size} style={style} />
+        <MaterialIcons name={name} color={color} size={size} style={style} />
       );
     } else if (
       (typeof name === 'object' &&
