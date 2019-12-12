@@ -39,7 +39,13 @@ class Icon extends React.PureComponent<IIconProps> {
 
     if (typeof name === 'string') {
       return (
-        <MaterialIcons name={name} color={color} size={size} style={style} />
+        <MaterialIcons
+          name={name}
+          color={color}
+          size={size}
+          style={style}
+          {...rest}
+        />
       );
     } else if (
       (typeof name === 'object' &&

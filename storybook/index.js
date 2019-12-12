@@ -23,6 +23,7 @@ function loadStories() {
   require('./stories/Avatar.js');
   require('./stories/Divider.js');
   require('./stories/AvatarEdit.js');
+  require('./stories/Checkbox.js');
 }
 
 configure(loadStories, module);

@@ -10,3 +10,4 @@ export {default as Icon} from './components/Icon';
 export {default as Fab} from './components/Fab';
 export {default as Switch} from './components/Switch';
 export {default as Divider} from './components/Divider';
+export {default as Checkbox} from './components/Checkbox';
