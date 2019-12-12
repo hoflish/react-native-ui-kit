@@ -1,12 +1,12 @@
 import React from 'react';
 import {View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
-import Avatar, {AvatarProps} from './Avatar';
-import {IThemeProps, DISPLAYNAME_PREFIX} from 'common/types';
-import {withTheme} from 'contexts/theme';
-import Icon from './Icon';
 import Config from './Config';
-import {grey} from 'common/colors';
+import {IThemeProps, DISPLAYNAME_PREFIX} from '../common/types';
+import {grey} from '../common/colors';
+import {withTheme} from '../contexts/theme';
+import Icon from './Icon';
+import Avatar, {AvatarProps} from './Avatar';
 
 export interface AvatarEditProps extends AvatarProps {
   /**

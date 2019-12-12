@@ -2,8 +2,8 @@ import React from 'react';
 import {Text, StyleSheet, View, ActivityIndicator} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 
-import {IThemeProps, DISPLAYNAME_PREFIX} from 'common/types';
-import {withTheme} from 'contexts/theme';
+import {IThemeProps, DISPLAYNAME_PREFIX} from '../common/types';
+import {withTheme} from '../contexts/theme';
 import Icon, {IconSource} from './Icon';
 import Elevation from './Elevation';
 import Config from './Config';

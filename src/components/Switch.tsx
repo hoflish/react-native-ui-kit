@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch as NativeSwitch, Platform, SwitchProps} from 'react-native';
-import {IThemeProps, DISPLAYNAME_PREFIX} from 'common/types';
-import {withTheme} from 'contexts/theme';
+import {IThemeProps, DISPLAYNAME_PREFIX} from '../common/types';
+import {withTheme} from '../contexts/theme';
 
 export interface ISwitchProps extends SwitchProps {
   /**
@@ -15,7 +15,7 @@ export interface ISwitchProps extends SwitchProps {
   thumbColorOverride?: string;
 
   /**
-   * If true, a parent component "controls" the switch and passing 
+   * If true, a parent component "controls" the switch and passing
    * the new value as prop to the controlled component.
    */
   isControlled?: boolean;

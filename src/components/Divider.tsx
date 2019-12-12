@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, StyleProp, ViewStyle} from 'react-native';
-import {IThemeProps} from 'common/types';
-import {useTheme} from 'contexts/theme';
+import {IThemeProps} from '../common/types';
+import {useTheme} from '../contexts/theme';
 
 export interface DividerProps {
   /**

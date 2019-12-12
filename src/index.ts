@@ -4,6 +4,7 @@ export {withTheme, ThemeProvider, useTheme} from './contexts/theme';
 
 export {default as Avatar} from './components/Avatar';
 export {default as AvatarEdit} from './components/AvatarEdit';
+export {default as Button} from './components/Button';
 export {default as Elevation} from './components/Elevation';
 export {default as Icon} from './components/Icon';
 export {default as Fab} from './components/Fab';

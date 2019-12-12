@@ -10,11 +10,6 @@
       "noEmit": true,
       "strict": true,
       "target": "esnext",
-      "baseUrl": ".",
-      "paths": {
-        "*": ["src/*"],
-        "tests": ["tests/*"]
-      },
     },
     "exclude": [
       "node_modules",

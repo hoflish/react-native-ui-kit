@@ -1,22 +1,15 @@
 import React from 'react';
-import {ThemeProvider} from 'contexts/theme';
-import {View, StyleSheet} from 'react-native';
-import defaultTheme from 'common/defaultTheme';
+import {View} from 'react-native';
+
+import {ThemeProvider} from '../src/contexts/theme';
 
 export default class Provider extends React.Component {
   render() {
     const {children, style} = this.props;
     return (
       <ThemeProvider>
-        <View style={[styles.wrapper, style]}>{children}</View>
+        <View style={style}>{children}</View>
       </ThemeProvider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    margin: 16,
-  },
-});

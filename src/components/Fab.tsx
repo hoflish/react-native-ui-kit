@@ -12,13 +12,12 @@
 import * as React from 'react';
 import {ActivityIndicator, Text, View, StyleSheet} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
-import {IThemeProps} from 'common/types';
-import {withTheme} from 'contexts/theme';
-import {grey} from 'common/colors';
+import {IThemeProps} from '../common/types';
+import {withTheme} from '../contexts/theme';
+import {grey} from '../common/colors';
 import Config from './Config';
-import Icon from './Icon';
+import Icon, {IconSource} from './Icon';
 import Elevation from './Elevation';
-import {IconSource} from './Icon';
 
 export interface FabProps {
   /**

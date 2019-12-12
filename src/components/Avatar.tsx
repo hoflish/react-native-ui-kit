@@ -2,7 +2,7 @@ import React from 'react';
 import {Image} from 'react-native';
 
 import {IconSource} from './Icon';
-import {DISPLAYNAME_PREFIX} from 'common/types';
+import {DISPLAYNAME_PREFIX} from '../common/types';
 import Config from './Config';
 
 export interface AvatarProps {

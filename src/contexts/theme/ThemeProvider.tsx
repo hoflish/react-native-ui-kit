@@ -1,5 +1,5 @@
 import React from 'react';
-import {IThemeProps} from 'common/types';
+import {IThemeProps} from '../../common/types';
 import ThemeContext from './ThemeContext';
 import useTheme from './useTheme';
 

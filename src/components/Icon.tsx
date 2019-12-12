@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, Image} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import {DISPLAYNAME_PREFIX} from 'common/types';
+import {DISPLAYNAME_PREFIX} from '../common/types';
 
 export type IconSource = string | {uri: string} | number;
 

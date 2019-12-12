@@ -1,6 +1,6 @@
 import {PlatformStatic} from 'react-native';
 
-export const DISPLAYNAME_PREFIX = 'Hoflish';
+export const DISPLAYNAME_PREFIX = 'HC';
 
 export interface Color {
   50: string;

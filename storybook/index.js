@@ -1,23 +1,31 @@
-import {AppRegistry} from 'react-native';
-import {getStorybookUI, configure} from '@storybook/react-native';
+import React from 'react';
+import {AppRegistry, View} from 'react-native';
+import {getStorybookUI, configure, addDecorator} from '@storybook/react-native';
 
 import {name as appName} from '../app.json';
 //import './rn-addons';
 
-// import stories
-const loaderFn = () => [
-  //require('./stories/touchable.stories.js'),
-  //require('./stories/icon.stories.js'),
-  //require('./stories/elevation.stories.js'),
-  //require('./stories/button.stories.js'),
-  //require('./stories/switch.stories.js'),
-  //require('./stories/fab.stories.js'),
-  //require('./stories/avatar.stories.js'),
-  require('./stories/divider.stories.js'),
-  require('./stories/avatarEdit.stories.js'),
-];
+const CenterDecorator = story => (
+  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    {story()}
+  </View>
+);
 
-configure(loaderFn, module);
+addDecorator(CenterDecorator);
+
+function loadStories() {
+  require('./stories/Touchable.js');
+  require('./stories/Icon.js');
+  require('./stories/Elevation.js');
+  require('./stories/Button.js');
+  require('./stories/Switch.js');
+  require('./stories/Fab.js');
+  require('./stories/Avatar.js');
+  require('./stories/Divider.js');
+  require('./stories/AvatarEdit.js');
+}
+
+configure(loadStories, module);
 
 // Refer to https://github.com/storybookjs/storybook/tree/master/app/react-native#start-command-parameters
 // To find allowed options for getStorybookUI
