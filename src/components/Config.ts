@@ -30,4 +30,5 @@ export default {
   FABBorderRadius: 28,
   FABFixedHeight: 64,
   FABExtendedPadding: 24,
+  ratingStarSize: 16,
 };

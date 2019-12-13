@@ -24,6 +24,7 @@ function loadStories() {
   require('./stories/Divider.js');
   require('./stories/AvatarEdit.js');
   require('./stories/Checkbox.js');
+  require('./stories/Rating.js');
 }
 
 configure(loadStories, module);

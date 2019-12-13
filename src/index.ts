@@ -11,3 +11,4 @@ export {default as Fab} from './components/Fab';
 export {default as Switch} from './components/Switch';
 export {default as Divider} from './components/Divider';
 export {default as Checkbox} from './components/Checkbox';
+export {default as Rating} from './components/Rating';
