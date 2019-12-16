@@ -1,44 +1,61 @@
 import React from 'react';
-import {Image} from 'react-native';
-
-import {IconSource} from './Icon';
-import {DISPLAYNAME_PREFIX} from '../common/types';
+import {Image, View, StyleSheet, ImageSourcePropType} from 'react-native';
+import {DISPLAYNAME_PREFIX} from '../common/utils';
 import Config from './Config';
+import {Theme} from '../types';
+import {withTheme} from '../core/theming';
 
 export interface AvatarProps {
   /**
-   * Image source for the avatar
+   * Image to display for the `Avatar`.
    */
-  image: IconSource;
+  source: string | ImageSourcePropType;
 
   /**
-   * Size of avatar in width and height
+   * Size of the avatar.
    */
   size: number;
+  style?: any;
 
   /**
-   * Styles
+   * @optional
    */
-  style?: any;
+  theme: Theme;
 }
 
-export default class Avatar extends React.PureComponent<AvatarProps, {}> {
+class Avatar extends React.Component<AvatarProps> {
   public static displayName = `${DISPLAYNAME_PREFIX}.Avatar`;
 
   public static defaultProps = {
-    image: Config.avatarImageUrl,
+    source: Config.avatarImageUrl,
     size: Config.avatarImageSize,
   };
 
   render() {
-    const {image, size, style} = this.props;
-    const borderRadius = size / 2;
+    const {source, size, style, theme} = this.props;
+    const {colors} = theme;
+
+    const {backgroundColor = colors.background} =
+      StyleSheet.flatten(style) || {};
+
     return (
-      <Image
-        style={[{width: size, height: size, borderRadius}, style]}
-        source={typeof image === 'string' ? {uri: image} : image}
-        resizeMode="cover"
-      />
+      <View
+        style={[
+          {
+            width: size,
+            height: size,
+            borderRadius: size / 2,
+            backgroundColor,
+          },
+          style,
+        ]}>
+        <Image
+          style={{width: size, height: size, borderRadius: size / 2}}
+          source={typeof source === 'string' ? {uri: source} : source}
+        />
+      </View>
     );
   }
 }
+
+export default withTheme(Avatar);

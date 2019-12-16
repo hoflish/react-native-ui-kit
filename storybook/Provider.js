@@ -1,15 +1,14 @@
 import React from 'react';
 import {View} from 'react-native';
 
-import {ThemeProvider} from '../src/contexts/theme';
+import {ThemeProvider} from '../src/';
 
-export default class Provider extends React.Component {
-  render() {
-    const {children, style} = this.props;
-    return (
-      <ThemeProvider>
-        <View style={style}>{children}</View>
-      </ThemeProvider>
-    );
-  }
-}
+const Provider = ({theme, style, children}) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <View style={style}>{children}</View>
+    </ThemeProvider>
+  );
+};
+
+export default Provider;

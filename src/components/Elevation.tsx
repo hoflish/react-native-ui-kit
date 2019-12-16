@@ -1,22 +1,26 @@
 import React from 'react';
 import {Animated, StyleSheet} from 'react-native';
-import shadow from '../common/shadow';
-import {useTheme} from '../contexts/theme';
+import shadow from '../styles/shadow';
+import {useTheme} from '../core/theming';
 
-export interface IElevationProps {
+interface Props {
   children: React.ReactNode;
   style?: any;
 }
 
-const Elevation: React.FC<IElevationProps> = ({children, style, ...rest}) => {
-  const theme = useTheme();
+const Elevation: React.FC<Props> = ({children, style, ...rest}) => {
   const flattenedStyles = StyleSheet.flatten(style) || {};
   const {elevation} = flattenedStyles;
+  const {colors} = useTheme();
 
   return (
     <Animated.View
       {...rest}
-      style={[elevation && shadow(elevation, theme), style]}>
+      style={[
+        {backgroundColor: colors.surface},
+        elevation && shadow(elevation),
+        style,
+      ]}>
       {children}
     </Animated.View>
   );

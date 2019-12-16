@@ -1,6 +1,5 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react-native';
-
 import Provider from '../Provider';
 import {Button} from '../../src/';
 
@@ -29,7 +28,7 @@ storiesOf('Button', module)
     </Button>
   ))
   .add('with elevation', () => (
-    <Button elevation={3}>button with elevation</Button>
+    <Button elevation={2}>button with elevation</Button>
   ))
   .add('outline with elevation', () => (
     <Button type="outline" elevation={3}>

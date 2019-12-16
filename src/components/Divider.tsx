@@ -1,43 +1,52 @@
 import React from 'react';
 import {View, StyleSheet, StyleProp, ViewStyle} from 'react-native';
-import {IThemeProps} from '../common/types';
-import {useTheme} from '../contexts/theme';
+import color from 'color';
+import {Theme} from '../types';
+import {useTheme} from '../core/theming';
+import {black, white} from '../styles/colors';
+import {DISPLAYNAME_PREFIX} from '../common/utils';
+import Config from './Config';
 
-export interface DividerProps {
+interface Props {
   /**
-   * Color of the Divider
+   *  Whether divider has a left inset.
    */
-  color?: string;
-
-  /**
-   * Height of the Divider
-   */
-  height?: number;
-
-  /**
-   * Styles
-   */
+  inset?: boolean;
   style?: StyleProp<ViewStyle>;
-
   /**
-   * Theme
+   * @optional
    */
-  theme?: IThemeProps;
+  theme: Theme;
 }
 
-const Divider: React.FC<DividerProps> = ({color, height, style}) => {
-  const {colors} = useTheme();
+const Divider: React.FC<Props> = ({inset, style, ...rest}) => {
+  const {dark: isDarkTheme} = useTheme();
+  const backgroundColor = color(isDarkTheme ? white : black)
+    .alpha(0.12)
+    .rgb()
+    .string();
+
   return (
     <View
+      {...rest}
       style={[
         {
-          backgroundColor: color || colors.primary,
-          height: height || StyleSheet.hairlineWidth,
+          height: StyleSheet.hairlineWidth,
+          backgroundColor,
         },
+        inset && styles.inset,
         style,
       ]}
     />
   );
 };
+
+Divider.displayName = `${DISPLAYNAME_PREFIX}.Divider`;
+
+const styles = StyleSheet.create({
+  inset: {
+    marginLeft: Config.dividerLeftInset,
+  },
+});
 
 export default Divider;

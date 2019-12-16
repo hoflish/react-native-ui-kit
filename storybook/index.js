@@ -25,6 +25,7 @@ function loadStories() {
   require('./stories/AvatarEdit.js');
   require('./stories/Checkbox.js');
   require('./stories/Rating.js');
+  require('./stories/themeColors.js');
 }
 
 configure(loadStories, module);

@@ -2,11 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {Text} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import Touchable from 'react-native-platform-touchable';
-
-import Provider from '../Provider';
-import {blue, grey} from '../../src/common/colors';
-import {useTheme} from '../../src/contexts/theme';
-import {Switch} from '../../src';
+import * as Colors from '../../src/styles/colors';
+import {useTheme, Switch} from '../../src';
+import Provider from "../Provider";
 
 function Usage({initialOn = false, disabled, isControlled, onToggle}) {
   const [state, setState] = useState(initialOn);
@@ -26,8 +24,8 @@ function Usage({initialOn = false, disabled, isControlled, onToggle}) {
         value={state}
         disabled={disabled}
         onValueChange={onChange}
-        checkedColorOverride={blue[100]}
-        thumbColorOverride={blue.A200}
+        checkedColorOverride={Colors.blue100}
+        thumbColorOverride={Colors.blueA200}
       />
     );
   }
@@ -40,11 +38,11 @@ function Usage({initialOn = false, disabled, isControlled, onToggle}) {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: disabled ? grey[100] : 'white',
+        backgroundColor: disabled ? Colors.grey100 : 'white',
         borderBottomWidth: 1,
         borderTopWidth: 1,
-        borderBottomColor: grey[200],
-        borderTopColor: grey[200],
+        borderBottomColor: Colors.grey200,
+        borderTopColor: Colors.grey200,
         paddingVertical: 12,
         paddingHorizontal: 12,
       }}>
@@ -52,7 +50,7 @@ function Usage({initialOn = false, disabled, isControlled, onToggle}) {
         <Text
           style={{
             paddingRight: 8,
-            color: disabled ? grey[500] : colors.strong,
+            color: disabled ? Colors.grey500 : colors.strong,
           }}>
           Controlled Switch Component
         </Text>
@@ -61,8 +59,8 @@ function Usage({initialOn = false, disabled, isControlled, onToggle}) {
           disabled={disabled}
           value={state}
           onValueChange={onChange}
-          checkedColorOverride={blue[100]}
-          thumbColorOverride={blue.A200}
+          checkedColorOverride={Colors.blue100}
+          thumbColorOverride={Colors.blueA200}
         />
       </>
     </Touchable>

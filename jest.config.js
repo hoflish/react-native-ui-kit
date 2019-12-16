@@ -1,4 +1,4 @@
 module.exports = {
-    preset: 'react-native',
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  };
+  projects: [{preset: 'jest-expo/ios'}, {preset: 'jest-expo/android'}],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+};

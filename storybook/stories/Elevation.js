@@ -12,14 +12,13 @@ storiesOf('Elevation', module)
       <Text style={{padding: 16}}>No Elevation</Text>
     </Elevation>
   ))
-  .add("with eleveatio set to '1'", () => (
+  .add("with elevation set to '1'", () => (
     <Elevation style={{elevation: 1}}>
       <Text style={{padding: 16}}>Elevation set to 1</Text>
     </Elevation>
   ))
-  .add("with elevation set to '3' and white background", () => (
-    <Elevation
-      style={{elevation: 3, backgroundColor: 'white', borderRadius: 3}}>
-      <Text style={{padding: 16}}>Elevation set to 3</Text>
+  .add("with elevation set to '2'", () => (
+    <Elevation style={{elevation: 2, borderRadius: 3}}>
+      <Text style={{padding: 16}}>Elevation set to 2</Text>
     </Elevation>
   ));

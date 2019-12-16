@@ -31,4 +31,5 @@ export default {
   FABFixedHeight: 64,
   FABExtendedPadding: 24,
   ratingStarSize: 16,
+  dividerLeftInset: 72,
 };

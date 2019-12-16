@@ -2,15 +2,13 @@ import React from 'react';
 import {storiesOf} from '@storybook/react-native';
 
 import {Icon} from '../../src/';
-import {orange} from '../../src/common/colors';
+import {blue500} from '../../src/styles/colors';
 
 storiesOf('Icon', module)
   .add("without 'name' returns null", () => <Icon />)
-  .add("with 'star' icon name", () => (
-    <Icon name="star" color={orange[400]} size={64} />
-  ))
+  .add('with icon name', () => <Icon name="add" color={blue500} size={48} />)
 
-  .add('with image as icon ', () => (
+  .add('with image icon ', () => (
     <Icon
       name={{
         uri: 'https://facebook.github.io/react-native/img/tiny_logo.png',

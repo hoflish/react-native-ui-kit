@@ -7,9 +7,13 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:update": "jest --updateSnapshot --coverage=false",
+    "test:coverage": "jest --coverage && open ./coverage/lcov-report/index.html",
     "lint": "eslint ."
   },
   "dependencies": {
+    "@callstack/react-theme-provider": "^3.0.5",
     "@types/jest": "^24.0.23",
     "@types/react": "^16.9.13",
     "@types/react-native": "^0.60.23",
@@ -17,7 +21,7 @@
     "appcenter": "2.6.0",
     "appcenter-analytics": "2.6.0",
     "appcenter-crashes": "2.6.0",
-    "hoist-non-react-statics": "^3.3.1",
+    "color": "^3.1.2",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-platform-touchable": "^1.1.1",
@@ -32,10 +36,8 @@
     "babel-jest": "^24.9.0",
     "eslint": "^6.7.2",
     "jest": "^24.9.0",
+    "jest-expo": "^36.0.1",
     "metro-react-native-babel-preset": "^0.57.0",
     "react-test-renderer": "16.9.0"
-  },
-  "jest": {
-    "preset": "react-native"
   }
 }

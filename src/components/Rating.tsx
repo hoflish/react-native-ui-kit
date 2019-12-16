@@ -6,13 +6,13 @@ import {
   ViewStyle,
   TouchableHighlight,
 } from 'react-native';
-
-import {withTheme} from '../contexts/theme';
-import {DISPLAYNAME_PREFIX, IThemeProps} from '../common/types';
+import {DISPLAYNAME_PREFIX} from '../common/utils';
 import Icon from './Icon';
 import Config from './Config';
+import {Theme} from '../types';
+import {withTheme} from '../core/theming';
 
-interface RatingProps {
+interface Props {
   /**
    * Maximum number of stars to be displayed
    */
@@ -38,20 +38,13 @@ interface RatingProps {
    */
   onPress?: (index: number) => void;
 
-  /**
-   * Styles
-   */
   style?: StyleProp<ViewStyle>;
-
-  /**
-   * Theme
-   */
-  theme: IThemeProps;
+  theme: Theme;
 }
 
 type State = {rating: number};
 
-class Rating extends React.PureComponent<RatingProps, State> {
+class Rating extends React.Component<Props, State> {
   public static displayName = `${DISPLAYNAME_PREFIX}.Rating`;
 
   public static defaultProps = {
@@ -60,7 +53,7 @@ class Rating extends React.PureComponent<RatingProps, State> {
     size: Config.ratingStarSize,
   };
 
-  constructor(props: RatingProps) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -92,15 +85,17 @@ class Rating extends React.PureComponent<RatingProps, State> {
       <View style={[styles.container, style]}>
         {[...Array(max)].map((v, i) => (
           <TouchableHighlight
-            disabled={!onPress}
             style={{width: size, height: size}}
+            accessibilityLabel={`${i + 1} stars`}
+            accessibilityTraits={'button'}
+            disabled={!onPress}
             underlayColor={'transparent'}
             onPress={() => this._onRate(i + 1)}>
             <Icon
               key={i}
               name={ratingRounded - i === 0.5 ? 'star-half' : 'star'}
               size={size}
-              color={ratingRounded > i ? starColor : colors.divider}
+              color={ratingRounded > i ? starColor : colors.light}
             />
           </TouchableHighlight>
         ))}

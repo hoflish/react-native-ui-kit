@@ -1,9 +1,8 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react-native';
-
 import Provider from '../Provider';
 import {Fab} from '../../src/';
-import {orange} from '../../src/common/colors';
+import {greenA700} from '../../src/styles/colors';
 
 const fabStyle = {
   marginHorizontal: 30,
@@ -36,7 +35,7 @@ storiesOf('Fab', module)
   .add('standard with custom color', () => (
     <Fab
       icon="add"
-      color={orange.A700}
+      color={greenA700}
       onPress={() => alert('Fab button pressed!')}
     />
   ));

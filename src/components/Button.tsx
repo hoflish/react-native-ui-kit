@@ -1,12 +1,14 @@
 import React from 'react';
 import {Text, StyleSheet, View, ActivityIndicator} from 'react-native';
+import color from 'color';
 import Touchable from 'react-native-platform-touchable';
-
-import {IThemeProps, DISPLAYNAME_PREFIX} from '../common/types';
-import {withTheme} from '../contexts/theme';
+import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {withTheme} from '../core/theming';
 import Icon, {IconSource} from './Icon';
 import Elevation from './Elevation';
 import Config from './Config';
+import {Theme} from '../types';
+import {black} from '../styles/colors';
 
 export interface IButtonProps {
   /**
@@ -66,10 +68,10 @@ export interface IButtonProps {
   /**
    * Theme used to get button global styles
    */
-  theme: IThemeProps;
+  theme: Theme;
 }
 
-class Button extends React.PureComponent<IButtonProps> {
+class Button extends React.Component<IButtonProps> {
   public static displayName = `${DISPLAYNAME_PREFIX}.Button`;
 
   public static defaultProps = {
@@ -77,7 +79,7 @@ class Button extends React.PureComponent<IButtonProps> {
     elevation: 0,
   };
 
-  render() {
+  public render() {
     const {
       type,
       color: colorOverride,
@@ -91,14 +93,7 @@ class Button extends React.PureComponent<IButtonProps> {
       style,
       theme,
     } = this.props;
-    const {
-      colors,
-      disabledOpacity,
-      borderRadius,
-      spacing,
-      typography,
-      colorWithAlpha,
-    } = theme;
+    const {colors, disabledOpacity, borderRadius, spacing, typography} = theme;
 
     let backgroundColor, borderColor, textColor, borderWidth;
     const buttonColor = colorOverride || colors.primary;
@@ -108,8 +103,14 @@ class Button extends React.PureComponent<IButtonProps> {
       backgroundColor = buttonColor;
 
       if (disabled) {
-        textColor = colorWithAlpha(colors.surface, disabledOpacity);
-        backgroundColor = colorWithAlpha(colors.surface, disabledOpacity);
+        textColor = color(black)
+          .alpha(0.32)
+          .rgb()
+          .string();
+        backgroundColor = color(black)
+          .alpha(0.12)
+          .rgb()
+          .string();
       } else {
         textColor = colors.surface;
       }
@@ -117,7 +118,10 @@ class Button extends React.PureComponent<IButtonProps> {
       backgroundColor = 'transparent';
 
       if (disabled) {
-        textColor = colorWithAlpha(buttonColor, disabledOpacity);
+        textColor = color(buttonColor)
+          .alpha(disabledOpacity)
+          .rgb()
+          .string();
       } else {
         textColor = buttonColor;
       }
@@ -125,7 +129,10 @@ class Button extends React.PureComponent<IButtonProps> {
 
     if (type === 'outline') {
       if (disabled) {
-        borderColor = colorWithAlpha(buttonColor, disabledOpacity);
+        borderColor = color(buttonColor)
+          .alpha(0.29)
+          .rgb()
+          .string();
       } else {
         borderColor = buttonColor;
       }
@@ -148,12 +155,6 @@ class Button extends React.PureComponent<IButtonProps> {
       marginHorizontal: spacing.large,
     };
 
-    const elevationStyle = {
-      elevation,
-      borderRadius: buttonBorderRadius,
-      ...(type === 'outline' && elevation && {backgroundColor: colors.surface}),
-    };
-
     const iconStyle = [
       styles.icon,
       {
@@ -163,7 +164,14 @@ class Button extends React.PureComponent<IButtonProps> {
     ];
 
     return (
-      <Elevation style={[styles.elevation, elevationStyle]}>
+      <Elevation
+        style={[
+          styles.elevation,
+          {
+            elevation,
+            borderRadius: buttonBorderRadius,
+          },
+        ]}>
         <Touchable
           onPress={onPress}
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}

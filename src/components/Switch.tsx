@@ -1,9 +1,10 @@
 import React from 'react';
 import {Switch as NativeSwitch, Platform, SwitchProps} from 'react-native';
-import {IThemeProps, DISPLAYNAME_PREFIX} from '../common/types';
-import {withTheme} from '../contexts/theme';
+import {Theme} from '../types';
+import { DISPLAYNAME_PREFIX } from '../common/utils';
+import { withTheme } from '../core/theming';
 
-export interface ISwitchProps extends SwitchProps {
+interface Props extends SwitchProps {
   /**
    * Custom color for switch background.
    */
@@ -21,19 +22,19 @@ export interface ISwitchProps extends SwitchProps {
   isControlled?: boolean;
 
   /**
-   * Theme
+   * @optional
    */
-  theme: IThemeProps;
+  theme: Theme;
 }
 
-class Switch extends React.PureComponent<ISwitchProps> {
+class Switch extends React.Component<Props> {
   public static displayName = `${DISPLAYNAME_PREFIX}.Switch`;
 
   render() {
     const {
-      isControlled,
       value,
       disabled,
+      isControlled,
       onValueChange,
       checkedColorOverride,
       thumbColorOverride,

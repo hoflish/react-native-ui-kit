@@ -8,4 +8,4 @@ const myGravatar =
 
 storiesOf('Avatar', module)
   .add('default', () => <Avatar />)
-  .add('with custom size', () => <Avatar size={40} image={myGravatar} />);
+  .add('with custom size', () => <Avatar size={40} source={myGravatar} />);

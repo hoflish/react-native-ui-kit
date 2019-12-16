@@ -2,11 +2,10 @@ import React from 'react';
 import {Animated} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 
-import {DISPLAYNAME_PREFIX} from '../common/types';
-import {withTheme} from '../contexts/theme';
+import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {withTheme} from '../core/theming';
 import {CheckboxProps} from './Checkbox';
 import Icon from './Icon';
-import {green, blue} from '../common/colors';
 
 interface State {
   scaleAnim: Animated.Value;

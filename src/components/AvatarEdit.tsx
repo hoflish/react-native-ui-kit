@@ -2,26 +2,21 @@ import React from 'react';
 import {View} from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import Config from './Config';
-import {IThemeProps, DISPLAYNAME_PREFIX} from '../common/types';
-import {grey} from '../common/colors';
-import {withTheme} from '../contexts/theme';
+import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {withTheme} from '../core/theming';
 import Icon from './Icon';
 import Avatar, {AvatarProps} from './Avatar';
+import {grey300} from '../styles/colors';
 
-export interface AvatarEditProps extends AvatarProps {
+interface AvatarEditProps extends AvatarProps {
   /**
    * Function to execute when image pressed
    */
   onPress: () => void;
-
-  /**
-   * Theme
-   */
-  theme: IThemeProps;
 }
 
-class AvatarEdit extends React.PureComponent<AvatarEditProps> {
-  public static displayName = `${DISPLAYNAME_PREFIX}.AvatarEdit`;
+class AvatarEdit extends React.Component<AvatarEditProps> {
+  public static displayName = `${DISPLAYNAME_PREFIX}.Avatar.Edit`;
 
   public static defaultProps = {
     onPress: () => {},
@@ -30,7 +25,7 @@ class AvatarEdit extends React.PureComponent<AvatarEditProps> {
 
   public render() {
     const {
-      image,
+      source,
       size,
       onPress,
       style,
@@ -38,7 +33,7 @@ class AvatarEdit extends React.PureComponent<AvatarEditProps> {
     } = this.props;
 
     const colorStyles = {
-      editBackgroundColor: grey[300],
+      editBackgroundColor: grey300,
       editIconColor: colors.strong,
       editBorderColor: colors.surface,
     };
@@ -54,7 +49,7 @@ class AvatarEdit extends React.PureComponent<AvatarEditProps> {
         ]}
         onPress={onPress}>
         <View>
-          <Avatar image={image} size={size} />
+          <Avatar source={source} size={size} />
           <View
             style={{
               position: 'absolute',

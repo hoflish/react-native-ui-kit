@@ -1,8 +1,6 @@
-import React, {useState, useEffect, useReducer} from 'react';
+import React, {useState, useEffect} from 'react';
 import {storiesOf} from '@storybook/react-native';
-
 import {Checkbox} from '../../src/';
-import {View, Text} from 'react-native';
 
 function Usage({onToggle}) {
   const [on, setOn] = useState(false);
@@ -17,7 +15,7 @@ function Usage({onToggle}) {
 
   return <Checkbox checked={on} onPress={() => onChange(on)} />;
 }
-
+/*
 function UsageWithList(props) {
   const initialState = [
     {id: 1, label: 'Apple'},
@@ -99,11 +97,10 @@ function UsageWithList(props) {
     </View>
   );
 }
-
+*/
 storiesOf('Checkbox', module)
   .add('checked', () => <Checkbox checked={true} />)
   .add('indeterminate', () => <Checkbox indeterminate={true} />)
   .add('unchecked', () => <Checkbox />)
   .add('disabled', () => <Checkbox disabled={true} />)
-  .add('usage', () => <Usage />)
-  .add('usage with list', () => <UsageWithList />);
+  .add('with onPress()', () => <Usage />);
