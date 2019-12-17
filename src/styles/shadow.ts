@@ -1,7 +1,7 @@
 import * as Colors from './colors';
 import {Animated} from 'react-native';
 
-export default function shadow(elevation: number | Animated.Value) {
+export default function shadow(elevation: number | Animated.Value = 0) {
   let height, radius;
 
   if (elevation instanceof Animated.Value) {

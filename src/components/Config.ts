@@ -3,8 +3,8 @@ interface FilterProps {
   height?: number;
 }
 
-function getFilters(options: FilterProps): string {
-  const {width, height} = options;
+export function getFilters(options?: FilterProps): string {
+  const {width, height} = options || {};
   const filters = ['c_scale', 'q_auto', 'dpr_auto'];
 
   if (width) filters.push(`w_${width}`);
@@ -13,7 +13,7 @@ function getFilters(options: FilterProps): string {
   return filters.join(',');
 }
 
-function buildImageUrl(options: FilterProps, name: string): string {
+export function buildImageUrl(name: string, options?: FilterProps): string {
   const filters = getFilters(options);
   return [
     'https://res.cloudinary.com/hoflish/image/upload',
@@ -23,7 +23,7 @@ function buildImageUrl(options: FilterProps, name: string): string {
 }
 
 export default {
-  avatarImageUrl: buildImageUrl({width: 60}, 'Avatar'),
+  avatarImageUrl: buildImageUrl('Avatar', {width: 60}),
   avatarImageSize: 60,
   buttonIconSize: 24,
   FABSize: 56,
