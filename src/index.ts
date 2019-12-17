@@ -13,3 +13,4 @@ export {default as Rating} from './components/Rating';
 export {default as Checkbox} from './components/Checkbox';
 export {default as Button} from './components/Button';
 export {default as Fab} from './components/Fab';
+export {default as IconButton} from './components/IconButton';
