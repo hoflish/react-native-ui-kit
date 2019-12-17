@@ -5,11 +5,9 @@ import {getStorybookUI, configure, addDecorator} from '@storybook/react-native';
 import {name as appName} from '../app.json';
 //import './rn-addons';
 
-const CenterDecorator = story => (
-  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    {story()}
-  </View>
-);
+const _style = {flex: 1, justifyContent: 'center', alignItems: 'center'};
+
+const CenterDecorator = story => <View style={_style}>{story()}</View>;
 
 addDecorator(CenterDecorator);
 

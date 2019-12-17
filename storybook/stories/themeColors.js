@@ -6,9 +6,10 @@ import Provider from '../Provider';
 
 function ThemeColors(props) {
   const {colors} = useTheme();
-
+  const _style = {width: 200, height: 30};
+  
   return Object.values(colors).map((color, key) => (
-    <View key={key} style={{width: 200, height: 30, backgroundColor: color}}>
+    <View key={key} style={[_style, {backgroundColor: color}]}>
       <Text>{color}</Text>
     </View>
   ));
