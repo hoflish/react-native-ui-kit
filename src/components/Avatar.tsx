@@ -23,7 +23,7 @@ export interface AvatarProps {
   theme: Theme;
 }
 
-class Avatar extends React.Component<AvatarProps> {
+class Avatar extends React.PureComponent<AvatarProps> {
   public static displayName = `${DISPLAYNAME_PREFIX}.Avatar`;
 
   public static defaultProps = {
@@ -32,8 +32,12 @@ class Avatar extends React.Component<AvatarProps> {
   };
 
   render() {
-    const {source, size, style, theme} = this.props;
-    const {colors} = theme;
+    const {
+      source,
+      size,
+      style,
+      theme: {colors},
+    } = this.props;
 
     const {backgroundColor = colors.background} =
       StyleSheet.flatten(style) || {};

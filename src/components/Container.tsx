@@ -1,15 +1,23 @@
 import React from 'react';
-import {View, Image} from 'react-native';
+import {View, Image, StyleSheet, ImageResizeMode} from 'react-native';
 import {useTheme} from '../core/theming';
 import Elevation from './Elevation';
 import {DISPLAYNAME_PREFIX} from '../common/utils';
 
-const Container: React.FC<{}> = (props: any) => {
+type Props = {
+  useThemeGutterPadding?: boolean;
+  bgColor?: string;
+  backgroundImage?: string | number;
+  backgroundImageResizeMode?: ImageResizeMode;
+  elevation?: number;
+  style?: any;
+  children: React.ReactNode;
+}
+
+const Container: React.FC<Props> = props => {
   const {
     useThemeGutterPadding,
-    borderColor,
-    borderWidth,
-    backgroundColor,
+    bgColor,
     backgroundImage,
     backgroundImageResizeMode,
     elevation,
@@ -17,14 +25,13 @@ const Container: React.FC<{}> = (props: any) => {
     children,
   } = props;
 
-  const {spacing} = useTheme();
+  const {colors, spacing} = useTheme();
 
   const containerStyle = {
     paddingHorizontal: useThemeGutterPadding ? spacing.gutters : 0,
-    backgroundColor,
-    borderColor,
-    borderWidth,
+    backgroundColor: bgColor || colors.surface,
     width: '100%',
+    elevation: 0,
   };
 
   const Wrap = elevation ? Elevation : View;
@@ -45,11 +52,8 @@ const Container: React.FC<{}> = (props: any) => {
             }
             resizeMode={backgroundImageResizeMode}
             style={{
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
+              ...StyleSheet.absoluteFillObject,
+              borderRadius: (style && style.borderRadius) || 0,
             }}
           />
         ) : null}

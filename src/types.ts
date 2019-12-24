@@ -1,20 +1,42 @@
 export type Color = string;
 
-export interface ThemeColors {
+export type Font = {
+  fontFamily: string;
+  fontWeight?:
+    | 'normal'
+    | 'bold'
+    | '100'
+    | '200'
+    | '300'
+    | '400'
+    | '500'
+    | '600'
+    | '700'
+    | '800'
+    | '900';
+};
+
+export type Fonts = {
+  regular: Font;
+  medium: Font;
+  light: Font;
+  thin: Font;
+};
+
+export type ThemeColors = {
   primary: Color;
   secondary: Color;
-  surface: Color;
-  background: Color;
   error: Color;
-  strong: Color;
+  text: Color;
   medium: Color;
   light: Color;
-  strongInverse: Color;
-  mediumInverse: Color;
-  lightInverse: Color;
-}
+  background: Color;
+  surface: Color;
+  placeholder: Color;
+  disabled: Color;
+};
 
-export interface TypoStyle {
+/*export interface TypoStyle {
   fontFamily: string;
   fontWeight: string;
   fontSize: number;
@@ -36,26 +58,24 @@ export interface Typography {
   button: TypoStyle;
   caption: TypoStyle;
   overline: TypoStyle;
-}
+}*/
 
-export interface Spacing {
+export type Spacing = {
   gutters: number;
   text: number;
   small: number;
   medium: number;
   large: number;
-}
+};
 
-export interface BorderRadius {
-  global: number;
-  button: number;
-}
-
-export interface Theme {
+export type Theme = {
   dark: boolean;
   disabledOpacity: number;
   colors: ThemeColors;
-  typography: Typography;
+  fonts: Fonts;
   spacing: Spacing;
-  borderRadius: BorderRadius;
-}
+  borderRadius: {
+    global: number;
+    button: number;
+  };
+};

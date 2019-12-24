@@ -5,10 +5,8 @@ import {Fab} from '../../src/';
 import {greenA700} from '../../src/styles/colors';
 
 const fabStyle = {
-  marginHorizontal: 30,
-  marginVertical: 60,
-  position: 'absolute',
-  bottom: 0,
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 storiesOf('Fab', module)
