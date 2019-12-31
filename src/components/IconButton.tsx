@@ -55,7 +55,7 @@ const IconButton: React.FC<Props> = ({
   const {colors, disabledOpacity} = useTheme();
   const iconColor = customColor || colors.text;
   const rippleColor = color(iconColor)
-    .alpha(disabledOpacity)
+    .alpha(0.32)
     .rgb()
     .string();
 
@@ -67,9 +67,10 @@ const IconButton: React.FC<Props> = ({
           (disabled && {
             opacity: disabledOpacity,
           }),
+        {width: size, height: size},
         style,
       ]}
-      background={Touchable.Ripple(rippleColor)}
+      background={Touchable.Ripple(rippleColor, true)}
       onPress={onPress}
       disabled={disabled}
       accessibilityLabel={accessibilityLabel}

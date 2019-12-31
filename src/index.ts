@@ -15,9 +15,12 @@ export {default as Elevation} from './components/Elevation';
 export {default as Fab} from './components/Fab';
 export {default as Icon} from './components/Icon';
 export {default as IconButton} from './components/IconButton';
+export {default as RadioButton} from './components/RadioButton';
+export {default as FieldRadioButton} from './components/FieldRadioButton';
 export {default as Rating} from './components/Rating';
 export {default as Switch} from './components/Switch';
 export {default as TextInput} from './components/TextInput/TextInput';
+export {default as Chip} from './components/Chip';
 
 export {default as Caption} from './components/Typography/Caption';
 export {default as Headline} from './components/Typography/Headline';

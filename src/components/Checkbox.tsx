@@ -4,6 +4,7 @@ import {useTheme} from '../core/theming';
 import {DISPLAYNAME_PREFIX} from '../common/utils';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
+import { Theme } from '../types';
 
 export interface CheckboxProps {
   /**
@@ -40,6 +41,8 @@ export interface CheckboxProps {
    * Custom color for the ripple effect
    */
   rippleColorOverride?: string;
+
+  theme: Theme
 }
 
 const Checkbox: React.FC<CheckboxProps> = props => {
