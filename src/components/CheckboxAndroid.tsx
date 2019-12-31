@@ -1,9 +1,9 @@
 import React from 'react';
-import {Animated} from 'react-native';
-import Touchable from 'react-native-platform-touchable';
+import {Animated, StyleSheet} from 'react-native';
 
 import {DISPLAYNAME_PREFIX} from '../common/utils';
 import {withTheme} from '../core/theming';
+import Touchable from "./Touchable";
 import {CheckboxProps} from './Checkbox';
 import Icon from './Icon';
 
@@ -13,6 +13,8 @@ interface State {
 
 class CheckboxAndroid extends React.Component<CheckboxProps, State> {
   public static displayName = `${DISPLAYNAME_PREFIX}.Checkbox.Android`;
+
+  public static readonly SIZE = 29;
 
   public state: State = {
     scaleAnim: new Animated.Value(1),
@@ -71,18 +73,21 @@ class CheckboxAndroid extends React.Component<CheckboxProps, State> {
         accessibilityRole="button"
         accessibilityStates={disabled ? ['disabled'] : undefined}
         accessibilityLiveRegion="polite"
-        style={{
-          borderRadius: 18,
-          width: 30,
-          height: 30,
-          opacity: disabled ? disabledOpacity : 1,
-        }}>
+        style={[styles.container, {opacity: disabled ? disabledOpacity : 1}]}>
         <Animated.View style={{transform: [{scale: this.state.scaleAnim}]}}>
-          <Icon name={icon} size={29} color={checkboxColor} />
+          <Icon name={icon} size={CheckboxAndroid.SIZE} color={checkboxColor} />
         </Animated.View>
       </Touchable>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    borderRadius: 18,
+    width: 30,
+    height: 30,
+  },
+});
 
 export default withTheme(CheckboxAndroid);

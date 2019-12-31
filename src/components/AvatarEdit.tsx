@@ -1,12 +1,11 @@
 import React from 'react';
 import {View} from 'react-native';
-import Touchable from 'react-native-platform-touchable';
 import Config from './Config';
 import {DISPLAYNAME_PREFIX} from '../common/utils';
 import {withTheme} from '../core/theming';
 import Icon from './Icon';
+import Touchable from "./Touchable";
 import Avatar, {AvatarProps} from './Avatar';
-import {grey300} from '../styles/colors';
 
 interface AvatarEditProps extends AvatarProps {
   /**
@@ -16,7 +15,7 @@ interface AvatarEditProps extends AvatarProps {
 }
 
 class AvatarEdit extends React.Component<AvatarEditProps> {
-  public static displayName = `${DISPLAYNAME_PREFIX}.Avatar.Edit`;
+  public static displayName = `${DISPLAYNAME_PREFIX}.AvatarEdit`;
 
   public static defaultProps = {
     onPress: () => {},
@@ -33,8 +32,8 @@ class AvatarEdit extends React.Component<AvatarEditProps> {
     } = this.props;
 
     const colorStyles = {
-      editBackgroundColor: grey300,
-      editIconColor: colors.strong,
+      editBackgroundColor: colors.background,
+      editIconColor: colors.text,
       editBorderColor: colors.surface,
     };
 

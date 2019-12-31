@@ -1,16 +1,16 @@
 import React from 'react';
 import {Text, StyleSheet, View, ActivityIndicator} from 'react-native';
 import color from 'color';
-import Touchable from 'react-native-platform-touchable';
 import {DISPLAYNAME_PREFIX} from '../common/utils';
 import {withTheme} from '../core/theming';
 import Icon, {IconSource} from './Icon';
+import Touchable from "./Touchable";
 import Elevation from './Elevation';
 import Config from './Config';
 import {Theme} from '../types';
 import {black} from '../styles/colors';
 
-export interface IButtonProps {
+export type Props = {
   /**
    * Type of the button. You can change the type to adjust the styling to give it desired emphasis.
    * - `outline` - button with an outline (medium emphasis)
@@ -69,12 +69,12 @@ export interface IButtonProps {
    * Theme used to get button global styles
    */
   theme: Theme;
-}
+};
 
-class Button extends React.Component<IButtonProps> {
+class Button extends React.Component<Props, {}> {
   public static displayName = `${DISPLAYNAME_PREFIX}.Button`;
 
-  public static defaultProps = {
+  public static defaultProps: Partial<Props> = {
     type: 'solid',
     elevation: 0,
   };
@@ -93,7 +93,7 @@ class Button extends React.Component<IButtonProps> {
       style,
       theme,
     } = this.props;
-    const {colors, disabledOpacity, borderRadius, spacing, typography} = theme;
+    const {colors, disabledOpacity, borderRadius, spacing, fonts} = theme;
 
     let backgroundColor, borderColor, textColor, borderWidth;
     const buttonColor = colorOverride || colors.primary;
@@ -103,10 +103,7 @@ class Button extends React.Component<IButtonProps> {
       backgroundColor = buttonColor;
 
       if (disabled) {
-        textColor = color(black)
-          .alpha(0.32)
-          .rgb()
-          .string();
+        textColor = colors.disabled;
         backgroundColor = color(black)
           .alpha(0.12)
           .rgb()
@@ -197,9 +194,7 @@ class Button extends React.Component<IButtonProps> {
             ) : null}
             <Text
               numberOfLines={1}
-              style={
-                [styles.label, typography.button, textStyle] as Array<object>
-              }>
+              style={[styles.label, fonts.regular, textStyle] as Array<object>}>
               {children}
             </Text>
           </View>

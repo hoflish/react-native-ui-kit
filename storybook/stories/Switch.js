@@ -4,9 +4,14 @@ import {storiesOf} from '@storybook/react-native';
 import Touchable from 'react-native-platform-touchable';
 import * as Colors from '../../src/styles/colors';
 import {useTheme, Switch} from '../../src';
-import Provider from "../Provider";
+import Provider from '../Provider';
 
-function Usage({initialOn = false, disabled, isControlled, onToggle}) {
+function Usage({
+  initialOn = false,
+  disabled,
+  isControlled,
+  onToggle = val => alert(val),
+}) {
   const [state, setState] = useState(initialOn);
   const {colors} = useTheme();
 

@@ -5,8 +5,7 @@ import {Icon} from '../../src/';
 import {blue500} from '../../src/styles/colors';
 
 storiesOf('Icon', module)
-  .add("without 'name' returns null", () => <Icon />)
-  .add('with icon name', () => <Icon name="add" color={blue500} size={48} />)
+  .add('with name', () => <Icon name="add" color={blue500} size={48} />)
 
   .add('with image icon ', () => (
     <Icon

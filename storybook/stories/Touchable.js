@@ -10,13 +10,6 @@ storiesOf('Touchable', module)
       <Text>touchable</Text>
     </Touchable>
   ))
-  .add('with background for borderless selectable elements [android]', () => (
-    <Touchable
-      style={styles.custom}
-      background={Touchable.SelectableBackgroundBorderless()}>
-      <Text>touchable</Text>
-    </Touchable>
-  ))
   .add('with ripple drawable with specified color', () => (
     <Touchable
       style={styles.custom}

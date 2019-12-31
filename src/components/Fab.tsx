@@ -1,13 +1,13 @@
 import React from 'react';
 import {ActivityIndicator, Text, View, StyleSheet} from 'react-native';
-import Touchable from 'react-native-platform-touchable';
-import color from "color";
+import color from 'color';
 import {withTheme} from '../core/theming';
 import Config from './Config';
+import Touchable from "./Touchable";
 import Icon, {IconSource} from './Icon';
 import Elevation from './Elevation';
 import {Theme} from '../types';
-import {greenA200, grey200, black} from '../styles/colors';
+import {black} from '../styles/colors';
 
 interface Props {
   /**
@@ -90,14 +90,20 @@ class FAB extends React.Component<Props> {
       ...rest
     } = this.props;
 
-    const {colors, borderRadius, spacing, typography} = theme;
+    const {colors, borderRadius, spacing, fonts} = theme;
 
     let textColor = colors.surface;
     let backgroundColor = colorOverride || colors.primary;
 
     if (disabled) {
-      textColor = color(black).alpha(0.32).rgb().string();
-      backgroundColor = color(black).alpha(0.12).rgb().string();
+      textColor = color(black)
+        .alpha(0.32)
+        .rgb()
+        .string();
+      backgroundColor = color(black)
+        .alpha(0.12)
+        .rgb()
+        .string();
     }
 
     const buttonStyle = {
@@ -183,7 +189,7 @@ class FAB extends React.Component<Props> {
               />
             ) : null}
             {label ? (
-              <Text numberOfLines={1} style={[textStyle, typography.button]}>
+              <Text numberOfLines={1} style={[textStyle, fonts.regular]}>
                 {label}
               </Text>
             ) : null}

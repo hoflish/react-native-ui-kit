@@ -1,9 +1,8 @@
 import React from 'react';
-import {StyleSheet, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, ActivityIndicator} from 'react-native';
 import color from 'color';
-import Touchable from 'react-native-platform-touchable';
 import {useTheme} from '../core/theming';
-import {View} from 'react-native';
+import Touchable from './Touchable';
 import Icon, {IconSource} from './Icon';
 
 interface Props {
@@ -54,9 +53,9 @@ const IconButton: React.FC<Props> = ({
   ...rest
 }) => {
   const {colors, disabledOpacity} = useTheme();
-  const iconColor = customColor || colors.strong;
+  const iconColor = customColor || colors.text;
   const rippleColor = color(iconColor)
-    .alpha(disabledOpacity)
+    .alpha(0.32)
     .rgb()
     .string();
 
@@ -68,12 +67,13 @@ const IconButton: React.FC<Props> = ({
           (disabled && {
             opacity: disabledOpacity,
           }),
+        {width: size, height: size},
         style,
       ]}
-      background={Touchable.Ripple(rippleColor)}
+      background={Touchable.Ripple(rippleColor, true)}
       onPress={onPress}
       disabled={disabled}
-      accessibilityLabel={accessibilityLabel || 'Icon button'}
+      accessibilityLabel={accessibilityLabel}
       accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
       accessibilityComponentType="button"
       accessibilityRole="button"

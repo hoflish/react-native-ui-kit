@@ -1,10 +1,10 @@
 import React from 'react';
 import {Platform} from 'react-native';
-import {withTheme} from '../core/theming';
-import {Theme} from '../types';
+import {useTheme} from '../core/theming';
 import {DISPLAYNAME_PREFIX} from '../common/utils';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
+import { Theme } from '../types';
 
 export interface CheckboxProps {
   /**
@@ -42,25 +42,18 @@ export interface CheckboxProps {
    */
   rippleColorOverride?: string;
 
-  theme: Theme;
+  theme: Theme
 }
 
-class Checkbox extends React.Component<CheckboxProps> {
-  public static displayName = `${DISPLAYNAME_PREFIX}.Checkbox`;
+const Checkbox: React.FC<CheckboxProps> = props => {
+  const theme = useTheme();
+  return Platform.OS === 'ios' ? (
+    <CheckboxIOS {...props} theme={theme} />
+  ) : (
+    <CheckboxAndroid {...props} theme={theme} />
+  );
+};
 
-  // @component ./CheckboxAndroid.js
-  private static Android = CheckboxAndroid;
+Checkbox.displayName = `${DISPLAYNAME_PREFIX}.Checkbox`;
 
-  // @component ./CheckboxIOS.js
-  private static IOS = CheckboxIOS;
-
-  render() {
-    return Platform.OS === 'ios' ? (
-      <Checkbox.IOS {...this.props} />
-    ) : (
-      <Checkbox.Android {...this.props} />
-    );
-  }
-}
-
-export default withTheme(Checkbox);
+export default Checkbox;
