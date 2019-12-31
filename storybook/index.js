@@ -26,6 +26,8 @@ function loadStories() {
   require('./stories/Checkbox.js');
   require('./stories/Rating.js');
   require('./stories/TextInput.js');
+  require('./stories/RadioButton.js');
+  require('./stories/Chip.js');
   /*
   require('./stories/Fab.js');
  */
