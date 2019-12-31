@@ -1,4 +1,4 @@
-export {default as Touchable} from 'react-native-platform-touchable';
+export {default as Touchable} from './components/Touchable';
 
 export {ThemeProvider, withTheme, useTheme} from './core/theming';
 export {default as Provider} from './core/Provider';
