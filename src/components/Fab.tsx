@@ -1,9 +1,16 @@
+// TODO: REVIEW...
 import React from 'react';
-import {ActivityIndicator, Text, View, StyleSheet} from 'react-native';
+import {
+  ActivityIndicator,
+  Text,
+  View,
+  StyleSheet,
+  ViewStyle,
+} from 'react-native';
 import color from 'color';
 import {withTheme} from '../core/theming';
 import Config from './Config';
-import Touchable from "./Touchable";
+import Touchable from './Touchable';
 import Icon, {IconSource} from './Icon';
 import Elevation from './Elevation';
 import {Theme} from '../types';

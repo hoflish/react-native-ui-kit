@@ -1,11 +1,32 @@
 {
-  "name": "ReactNativeUIKit",
-  "version": "0.0.1",
-  "private": true,
+  "name": "@hoflish/react-native-ui-kit",
+  "version": "1.0.0",
+  "description": "React Native Components & UI Toolkit",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "react-native": "lib/module/index.js",
+  "types": "lib/typescript/src/index.d.ts",
+  "files": [
+    "lib/",
+    "src/"
+  ],
+  "keywords": [
+    "android",
+    "ios",
+    "react native",
+    "component library",
+    "ui kit"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hoflish/react-native-ui-kit.git"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "prepare": "bob build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:update": "jest --updateSnapshot --coverage=false",
@@ -14,31 +35,55 @@
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.5",
-    "@types/jest": "^24.0.23",
-    "@types/react": "^16.9.13",
-    "@types/react-native": "^0.60.23",
-    "@types/react-test-renderer": "^16.9.1",
-    "appcenter": "2.6.0",
-    "appcenter-analytics": "2.6.0",
-    "appcenter-crashes": "2.6.0",
     "color": "^3.1.2",
     "react": "16.9.0",
-    "react-lifecycles-compat": "^3.0.4",
     "react-native": "0.61.5",
     "react-native-platform-touchable": "^1.1.1",
-    "react-native-vector-icons": "^6.6.0",
-    "typescript": "^3.7.2"
+    "react-native-vector-icons": "^6.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/runtime": "^7.7.4",
+    "@react-native-community/bob": "^0.7.0",
     "@react-native-community/eslint-config": "^0.0.5",
     "@storybook/react-native": "^5.2.8",
+    "@types/color": "^3.0.0",
+    "@types/jest": "^24.0.25",
+    "@types/react": "^16.9.17",
+    "@types/react-native": "^0.60.27",
+    "@types/react-test-renderer": "^16.9.1",
     "babel-jest": "^24.9.0",
     "eslint": "^6.7.2",
     "jest": "^24.9.0",
-    "jest-expo": "^36.0.1",
     "metro-react-native-babel-preset": "^0.57.0",
-    "react-test-renderer": "16.9.0"
+    "react-test-renderer": "16.9.0",
+    "typescript": "^3.7.4"
+  },
+  "jest": {
+    "preset": "react-native",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/lib/",
+      "<rootDir>/storybook/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ],
+    "files": [
+      "src/"
+    ]
   }
 }
