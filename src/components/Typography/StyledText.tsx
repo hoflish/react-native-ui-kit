@@ -26,11 +26,12 @@ class StyledText extends React.Component<Props> {
     return (
       <Text
         {...rest}
-        style={[
-          {color: textColor, ...font, textAlign: 'left', writingDirection},
-          style,
-          this.props.style,
-        ]}
+        style={
+          [
+            {color: textColor, ...font, textAlign: 'left', writingDirection},
+            style,
+          ] as StyleProp<TextStyle>
+        }
       />
     );
   }

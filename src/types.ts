@@ -34,6 +34,7 @@ export type ThemeColors = {
   surface: Color;
   placeholder: Color;
   disabled: Color;
+  backdrop: Color;
 };
 
 export type Spacing = {
@@ -54,4 +55,13 @@ export type Theme = {
     global: number;
     button: number;
   };
+  animation: {
+    scale: number;
+  };
 };
+
+export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
+  React.ComponentProps<T>,
+  'children'
+>;

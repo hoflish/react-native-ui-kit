@@ -18,7 +18,7 @@ import {Theme} from '../types';
 import Touchable from './Touchable';
 import Elevation from './Elevation';
 import IconButton from './IconButton';
-import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {DISPLAYNAME_PREFIX} from '../constants';
 
 type Props = {
   /**
@@ -183,16 +183,19 @@ class Chip extends React.Component<Props, State> {
       : selectedBackgroundColor;
 
     const accessibilityTraits: AccessibilityTrait[] = ['button'];
-    const accessibilityStates: AccessibilityState[] = [];
+    const accessibilityState: AccessibilityState = {
+      selected: false,
+      disabled: false,
+    };
 
     if (selected) {
       accessibilityTraits.push('selected');
-      accessibilityStates.push('selected');
+      accessibilityState.selected = true;
     }
 
     if (disabled) {
       accessibilityTraits.push('disabled');
-      accessibilityStates.push('disabled');
+      accessibilityState.disabled = true;
     }
 
     return (
@@ -225,15 +228,13 @@ class Chip extends React.Component<Props, State> {
           accessibilityTraits={accessibilityTraits}
           accessibilityComponentType="button"
           accessibilityRole="button"
-          accessibilityStates={accessibilityStates}
+          accessibilityState={accessibilityState}
           testID={testID}>
           <View style={styles.content}>
             {avatar && !icon ? (
               <View style={[styles.avatarWrapper, disabled && {opacity: 0.26}]}>
                 {React.isValidElement(avatar)
-                  ? /* $FlowFixMe */
-                    React.cloneElement(avatar, {
-                      /* $FlowFixMe */
+                  ? React.cloneElement(avatar, {
                       style: [styles.avatar, avatar.props.style],
                     })
                   : avatar}

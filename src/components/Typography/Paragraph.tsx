@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextProps, StyleSheet} from 'react-native';
+import {TextProps, StyleSheet, StyleProp, TextStyle} from 'react-native';
 import StyledText from './StyledText';
 
 type Props = TextProps & {
@@ -32,7 +32,7 @@ const Paragraph = (props: Props) => (
     {...props}
     alpha={0.87}
     family="regular"
-    style={[styles.text, props.style]}
+    style={[styles.text, props.style] as StyleProp<TextStyle>}
   />
 );
 

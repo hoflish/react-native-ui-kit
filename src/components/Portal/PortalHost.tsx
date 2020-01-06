@@ -1,24 +1,24 @@
-import React from 'react';
+import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
 import PortalManager from './PortalManager';
-import {DISPLAYNAME_PREFIX} from '../../common/utils';
+import {DISPLAYNAME_PREFIX} from '../../constants';
 
-interface Props {
+type Props = {
   children: React.ReactNode;
-}
+};
 
 type Operation =
   | {type: 'mount'; key: number; children: React.ReactNode}
   | {type: 'update'; key: number; children: React.ReactNode}
   | {type: 'unmount'; key: number};
 
-export interface PortalMethods {
+export type PortalMethods = {
   mount: (children: React.ReactNode) => number;
   update: (key: number, children: React.ReactNode) => void;
   unmount: (key: number) => void;
-}
+};
 
-export const PortalContext = React.createContext<PortalMethods | null>(null);
+export const PortalContext = React.createContext<PortalMethods>(null as any);
 
 /**
  * Portal host renders all of its children `Portal` elements.
@@ -29,7 +29,7 @@ export const PortalContext = React.createContext<PortalMethods | null>(null);
  * ```js
  * import * as React from 'react';
  * import { Text } from 'react-native';
- * import { Portal } from 'react-native-paper';
+ * import { Portal } from '@hoflish/react-native-ui-kit';
  *
  * export default class MyComponent extends React.Component {
  *   render() {
@@ -48,85 +48,90 @@ export default class PortalHost extends React.Component<Props> {
   public static displayName = `${DISPLAYNAME_PREFIX}.Portal.Host`;
 
   public componentDidMount() {
-    const manager = this._manager;
-    const queue = this._queue;
+    const manager = this.manager;
+    const queue = this.queue;
 
     while (queue.length && manager) {
-      const action: any = queue.pop();
-
-      // eslint-disable-next-line default-case
-      switch (action.type) {
-        case 'mount':
-          manager.mount(action.key, action.children);
-          break;
-        case 'update':
-          manager.update(action.key, action.children);
-          break;
-        case 'unmount':
-          manager.unmount(action.key);
-          break;
+      const action = queue.pop();
+      if (action) {
+        // eslint-disable-next-line default-case
+        switch (action.type) {
+          case 'mount':
+            manager.mount(action.key, action.children);
+            break;
+          case 'update':
+            manager.update(action.key, action.children);
+            break;
+          case 'unmount':
+            manager.unmount(action.key);
+            break;
+        }
       }
     }
   }
 
-  _setManager = (manager?: PortalManager) => {
-    this._manager = manager;
+  private setManager = (manager: PortalManager | undefined | null) => {
+    this.manager = manager;
   };
 
-  _mount = (children: React.ReactNode) => {
-    const key = this._nextKey++;
+  private mount = (children: React.ReactNode) => {
+    const key = this.nextKey++;
 
-    if (this._manager) {
-      this._manager.mount(key, children);
+    if (this.manager) {
+      this.manager.mount(key, children);
     } else {
-      this._queue.push({type: 'mount', key, children});
+      this.queue.push({type: 'mount', key, children});
     }
 
     return key;
   };
 
-  _update = (key: number, children: React.ReactNode) => {
-    if (this._manager) {
-      this._manager.update(key, children);
+  private update = (key: number, children: React.ReactNode) => {
+    if (this.manager) {
+      this.manager.update(key, children);
     } else {
       const op = {type: 'mount', key, children};
-      const index = this._queue.findIndex(
+      const index = this.queue.findIndex(
         o => o.type === 'mount' || (o.type === 'update' && o.key === key),
       );
 
       if (index > -1) {
-        this._queue[index] = op;
+        // @ts-ignore
+        this.queue[index] = op;
       } else {
-        this._queue.push(op);
+        this.queue.push(op as Operation);
       }
     }
   };
 
-  _unmount = (key: number) => {
-    if (this._manager) {
-      this._manager.unmount(key);
+  private unmount = (key: number) => {
+    if (this.manager) {
+      this.manager.unmount(key);
     } else {
-      this._queue.push({type: 'unmount', key});
+      this.queue.push({type: 'unmount', key});
     }
   };
 
-  _nextKey = 0;
-  _queue: Array<Operation> = [];
-  _manager?: PortalManager;
+  private nextKey = 0;
+  private queue: Operation[] = [];
+  private manager: PortalManager | null | undefined;
 
-  render() {
+  public render() {
     return (
       <PortalContext.Provider
         value={{
-          mount: this._mount,
-          update: this._update,
-          unmount: this._unmount,
+          mount: this.mount,
+          update: this.update,
+          unmount: this.unmount,
         }}>
         {/* Need collapsable=false here to clip the elevations, otherwise they appear above Portal components */}
-        <View style={styles.container} collapsable={false}>
+        <View
+          style={styles.container}
+          collapsable={false}
+          pointerEvents="box-none">
           {this.props.children}
         </View>
-        <PortalManager ref={this._setManager} />
+        <PortalManager ref={this.setManager} />
       </PortalContext.Provider>
     );
   }

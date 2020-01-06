@@ -1,5 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import {PortalMethods} from './PortalHost';
+import {DISPLAYNAME_PREFIX} from '../../constants';
 
 type Props = {
   manager: PortalMethods;
@@ -7,30 +8,40 @@ type Props = {
 };
 
 export default class PortalConsumer extends React.Component<Props> {
-  async componentDidMount() {
-    if (!this.props.manager) {
-      throw new Error(
-        'Looks like you forgot to wrap your root component with `Provider` component.',
-      );
-    }
+  public static displayName = `${DISPLAYNAME_PREFIX}.Portal.Consumer`;
+
+  public async componentDidMount() {
+    this.checkManager();
 
     // Delay updating to prevent React from going to infinite loop
     await Promise.resolve();
 
-    this._key = this.props.manager.mount(this.props.children);
+    this.key = this.props.manager.mount(this.props.children);
   }
 
-  componentDidUpdate() {
-    this.props.manager.update(this._key, this.props.children);
+  public componentDidUpdate() {
+    this.checkManager();
+
+    this.props.manager.update(this.key, this.props.children);
   }
 
-  componentWillUnmount() {
-    this.props.manager.unmount(this._key);
+  public componentWillUnmount() {
+    this.checkManager();
+
+    this.props.manager.unmount(this.key);
   }
 
-  _key: any;
+  private key: any;
 
-  render() {
+  private checkManager() {
+    if (!this.props.manager) {
+      throw new Error(
+        'Looks like you forgot to wrap your root component with `Provider` component from `@hoflish/react-native-ui-kit`.',
+      );
+    }
+  }
+
+  public render() {
     return null;
   }
 }

@@ -24,11 +24,11 @@ class Text extends React.Component<Props> {
   /**
    * @internal
    */
-  setNativeProps(args: Object) {
+  public setNativeProps(args: Object) {
     return this.root && this.root.setNativeProps(args);
   }
 
-  render() {
+  public render() {
     const {style, theme, ...rest} = this.props;
 
     return (
@@ -37,14 +37,16 @@ class Text extends React.Component<Props> {
         ref={c => {
           this.root = c;
         }}
-        style={[
-          {
-            ...theme.fonts.regular,
-            color: theme.colors.text,
-            textAlign: 'left',
-          },
-          style,
-        ]}
+        style={
+          [
+            {
+              ...theme.fonts.regular,
+              color: theme.colors.text,
+              textAlign: 'left',
+            },
+            style,
+          ] as StyleProp<TextStyle>
+        }
       />
     );
   }

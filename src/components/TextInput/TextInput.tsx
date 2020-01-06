@@ -5,8 +5,7 @@ import {
   Platform,
   LayoutChangeEvent,
 } from 'react-native';
-
-import {DISPLAYNAME_PREFIX} from '../../common/utils';
+import {DISPLAYNAME_PREFIX} from '../../constants';
 import TextInputOutlined from './TextInputOutlined';
 import TextInputFlat from './TextInputFlat';
 import {withTheme} from '../../core/theming';
@@ -235,7 +234,7 @@ class TextInput extends React.Component<TextInputProps, State> {
       placeholder: '',
     });
 
-  private timer?: number;
+  private timer?: NodeJS.Timeout;
   private root: NativeTextInput | undefined | null;
 
   private showError = () => {

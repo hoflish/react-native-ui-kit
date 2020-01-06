@@ -1,10 +1,10 @@
 import React from 'react';
 import {Text, StyleSheet, View, ActivityIndicator} from 'react-native';
 import color from 'color';
-import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {DISPLAYNAME_PREFIX} from '../constants';
 import {withTheme} from '../core/theming';
 import Icon, {IconSource} from './Icon';
-import Touchable from "./Touchable";
+import Touchable from './Touchable';
 import Elevation from './Elevation';
 import Config from './Config';
 import {Theme} from '../types';

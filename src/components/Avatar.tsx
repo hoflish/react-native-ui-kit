@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, View, StyleSheet, ImageSourcePropType} from 'react-native';
-import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {DISPLAYNAME_PREFIX} from '../constants';
 import Config from './Config';
 import {Theme} from '../types';
 import {withTheme} from '../core/theming';

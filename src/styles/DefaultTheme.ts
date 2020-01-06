@@ -15,6 +15,10 @@ const THEME_COLORS = {
     .alpha(0.26)
     .rgb()
     .string(),
+  backdrop: Color(black)
+    .alpha(0.5)
+    .rgb()
+    .string(),
   placeholder: Color(black)
     .alpha(0.54)
     .rgb()
@@ -37,4 +41,5 @@ export default {
     button: 24,
   },
   fonts: configureFonts(),
+  animation: {scale: 1.0},
 };

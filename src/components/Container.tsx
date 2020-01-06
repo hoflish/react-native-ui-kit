@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Image, StyleSheet, ImageResizeMode} from 'react-native';
 import {useTheme} from '../core/theming';
 import Elevation from './Elevation';
-import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {DISPLAYNAME_PREFIX} from '../constants';
 
 type Props = {
   useThemeGutterPadding?: boolean;
@@ -12,7 +12,7 @@ type Props = {
   elevation?: number;
   style?: any;
   children: React.ReactNode;
-}
+};
 
 const Container: React.FC<Props> = props => {
   const {

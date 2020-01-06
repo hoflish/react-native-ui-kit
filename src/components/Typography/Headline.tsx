@@ -34,7 +34,7 @@ const Headline = (props: Props) => (
     {...props}
     alpha={0.87}
     family="regular"
-    style={[styles.text, props.style]}
+    style={[styles.text, props.style] as StyleProp<TextStyle>}
   />
 );
 

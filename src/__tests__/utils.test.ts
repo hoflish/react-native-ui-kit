@@ -1,7 +1,7 @@
-import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {DISPLAYNAME_PREFIX} from '../constants';
 
 describe('utils', () => {
   it('Library Displayname Prefix', () => {
-    expect(DISPLAYNAME_PREFIX).toBe('HC');
+    expect(DISPLAYNAME_PREFIX).toBe('RNUIKIT');
   });
 });

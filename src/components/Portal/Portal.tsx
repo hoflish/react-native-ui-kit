@@ -1,20 +1,20 @@
-import React from 'react';
+import * as React from 'react';
 import PortalConsumer from './PortalConsumer';
-import PortalHost, {PortalContext} from './PortalHost';
+import PortalHost, {PortalContext, PortalMethods} from './PortalHost';
 import {ThemeProvider, withTheme} from '../../core/theming';
 import {Theme} from '../../types';
+import {DISPLAYNAME_PREFIX} from '../../constants';
 
-interface Props {
+type Props = {
   /**
    * Content of the `Portal`.
    */
   children: React.ReactNode;
-
   /**
    * @optional
    */
   theme: Theme;
-}
+};
 
 /**
  * Portal allows to render a component at a different place in the parent tree.
@@ -24,7 +24,7 @@ interface Props {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Portal, Text } from 'react-native-paper';
+ * import { Portal, Text } from '@hoflish/react-native-ui-kit';
  *
  * export default class MyComponent extends React.Component {
  *   render() {
@@ -38,16 +38,18 @@ interface Props {
  * ```
  */
 class Portal extends React.Component<Props> {
-  // @component ./PortalHost.js
-  static Host = PortalHost;
+  public static displayName = `${DISPLAYNAME_PREFIX}.Portal`;
 
-  render() {
+  // @component ./PortalHost.tsx
+  public static Host = PortalHost;
+
+  public render() {
     const {children, theme} = this.props;
 
     return (
       <PortalContext.Consumer>
         {manager => (
-          <PortalConsumer manager={manager}>
+          <PortalConsumer manager={manager as PortalMethods}>
             <ThemeProvider theme={theme}>{children}</ThemeProvider>
           </PortalConsumer>
         )}

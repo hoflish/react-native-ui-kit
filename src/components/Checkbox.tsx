@@ -1,9 +1,10 @@
 import React from 'react';
 import {Platform} from 'react-native';
-import {useTheme} from '../core/theming';
-import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {withTheme} from '../core/theming';
+import {DISPLAYNAME_PREFIX} from '../constants';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
+import {Theme} from '../types';
 
 export interface CheckboxProps {
   /**
@@ -40,17 +41,18 @@ export interface CheckboxProps {
    * Custom color for the ripple effect
    */
   rippleColorOverride?: string;
+
+  theme: Theme;
 }
 
 const Checkbox: React.FC<CheckboxProps> = props => {
-  const theme = useTheme();
   return Platform.OS === 'ios' ? (
-    <CheckboxIOS {...props} theme={theme} />
+    <CheckboxIOS {...props} />
   ) : (
-    <CheckboxAndroid {...props} theme={theme} />
+    <CheckboxAndroid {...props} />
   );
 };
 
 Checkbox.displayName = `${DISPLAYNAME_PREFIX}.Checkbox`;
 
-export default Checkbox;
+export default withTheme(Checkbox);

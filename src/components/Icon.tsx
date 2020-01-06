@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, Image, View, StyleSheet} from 'react-native';
-import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {Text, Image, View, StyleSheet, PixelRatio} from 'react-native';
+import {DISPLAYNAME_PREFIX} from '../constants';
 
 export type IconSource = string | {uri: string} | number;
 
@@ -32,11 +32,11 @@ try {
     // eslint-disable-next-line no-console
     console.warn(
       `Tried to use the icon '${name}' in a component from '[library]', but 'react-native-vector-icons' could not be loaded.`,
-      `To remove this warning, try installing 'react-native-vector-icons' or use another method to specify icon.`,
+      "To remove this warning, try installing 'react-native-vector-icons' or use another method to specify icon.",
     );
 
     return (
-      <Text {...rest} style={[styles.icon, {color, fontSize: size}]}>
+      <Text {...rest} style={[styles.icon, {color, fontSize: size}, style]}>
         □
       </Text>
     );
@@ -46,7 +46,7 @@ try {
 const Icon: React.FC<Props> = ({
   name,
   color,
-  size,
+  size = 24,
   style,
   ...rest
 }): React.ReactElement | null => {
@@ -59,7 +59,7 @@ const Icon: React.FC<Props> = ({
       <MaterialIcons
         name={name}
         color={color}
-        size={size}
+        size={size * PixelRatio.getFontScale()}
         style={style}
         {...rest}
       />
