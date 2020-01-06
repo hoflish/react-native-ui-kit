@@ -1,5 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
+import {DISPLAYNAME_PREFIX} from '../../constants';
 
 type State = {
   portals: Array<{
@@ -12,17 +13,19 @@ type State = {
  * Portal host is the component which actually renders all Portals.
  */
 export default class PortalManager extends React.PureComponent<{}, State> {
-  state: State = {
+  public static displayName = `${DISPLAYNAME_PREFIX}.Portal.Manager`;
+
+  public state: State = {
     portals: [],
   };
 
-  mount = (key: number, children: React.ReactNode) => {
+  public mount = (key: number, children: React.ReactNode) => {
     this.setState(state => ({
       portals: [...state.portals, {key, children}],
     }));
   };
 
-  update = (key: number, children: React.ReactNode) =>
+  public update = (key: number, children: React.ReactNode) =>
     this.setState(state => ({
       portals: state.portals.map(item => {
         if (item.key === key) {
@@ -32,12 +35,12 @@ export default class PortalManager extends React.PureComponent<{}, State> {
       }),
     }));
 
-  unmount = (key: number) =>
+  public unmount = (key: number) =>
     this.setState(state => ({
       portals: state.portals.filter(item => item.key !== key),
     }));
 
-  render() {
+  public render() {
     return this.state.portals.map(({key, children}) => (
       <View
         key={key}

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Switch as NativeSwitch, Platform, SwitchProps} from 'react-native';
 import {Theme} from '../types';
-import { DISPLAYNAME_PREFIX } from '../common/utils';
-import { withTheme } from '../core/theming';
+import {DISPLAYNAME_PREFIX} from '../constants';
+import {withTheme} from '../core/theming';
 
 interface Props extends SwitchProps {
   /**
@@ -41,12 +41,15 @@ class Switch extends React.Component<Props> {
       theme: {colors, disabledOpacity},
       ...rest
     } = this.props;
-    let thumbColor = undefined;
+    let thumbColor;
     let checkedColor = checkedColorOverride || colors.primary;
 
     if (Platform.OS !== 'ios') {
       thumbColor = thumbColorOverride || colors.surface;
     }
+
+    const opacity = disabled && Platform.OS !== 'ios' ? disabledOpacity : 1;
+
     return (
       <NativeSwitch
         {...rest}
@@ -55,9 +58,7 @@ class Switch extends React.Component<Props> {
         onValueChange={onValueChange}
         trackColor={{false: '', true: checkedColor}}
         thumbColor={value ? thumbColor : colors.surface}
-        style={{
-          opacity: disabled && Platform.OS !== 'ios' ? disabledOpacity : 1,
-        }}
+        style={{opacity}}
       />
     );
   }

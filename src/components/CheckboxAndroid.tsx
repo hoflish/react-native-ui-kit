@@ -1,9 +1,8 @@
 import React from 'react';
 import {Animated, StyleSheet} from 'react-native';
 
-import {DISPLAYNAME_PREFIX} from '../common/utils';
-import {withTheme} from '../core/theming';
-import Touchable from "./Touchable";
+import {DISPLAYNAME_PREFIX} from '../constants';
+import Touchable from './Touchable';
 import {CheckboxProps} from './Checkbox';
 import Icon from './Icon';
 
@@ -62,6 +61,8 @@ class CheckboxAndroid extends React.Component<CheckboxProps, State> {
       ? 'check-box'
       : 'check-box-outline-blank';
 
+    const opacity = disabled ? disabledOpacity : 1;
+
     return (
       <Touchable
         {...rest}
@@ -73,7 +74,7 @@ class CheckboxAndroid extends React.Component<CheckboxProps, State> {
         accessibilityRole="button"
         accessibilityStates={disabled ? ['disabled'] : undefined}
         accessibilityLiveRegion="polite"
-        style={[styles.container, {opacity: disabled ? disabledOpacity : 1}]}>
+        style={[styles.container, {opacity}]}>
         <Animated.View style={{transform: [{scale: this.state.scaleAnim}]}}>
           <Icon name={icon} size={CheckboxAndroid.SIZE} color={checkboxColor} />
         </Animated.View>
@@ -90,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(CheckboxAndroid);
+export default CheckboxAndroid;

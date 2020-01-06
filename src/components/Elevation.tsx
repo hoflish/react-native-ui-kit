@@ -1,12 +1,12 @@
-import React from 'react';
-import {Animated, StyleSheet} from 'react-native';
+import * as React from 'react';
+import {Animated, StyleSheet, View, StyleProp, ViewStyle} from 'react-native';
 import shadow from '../styles/shadow';
 import {useTheme} from '../core/theming';
 
-interface Props {
+type Props = React.ComponentProps<typeof View> & {
   children: React.ReactNode;
-  style?: any;
-}
+  style?: StyleProp<ViewStyle>;
+};
 
 const Elevation: React.FC<Props> = ({children, style, ...rest}) => {
   const flattenedStyles = StyleSheet.flatten(style) || {};

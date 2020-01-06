@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  Animated,
   TextInput as NativeTextInput,
   StyleSheet,
   I18nManager,
@@ -10,6 +9,7 @@ import {
 } from 'react-native';
 import color from 'color';
 import InputLabel from './Label/InputLabel';
+import Underline from './Underline';
 import {RenderProps, ChildTextInputProps} from './types';
 
 import {
@@ -17,7 +17,7 @@ import {
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
   LABEL_PADDING_HORIZONTAL,
-} from './constants';
+} from './_constants';
 
 import {
   calculateLabelTopPosition,
@@ -27,9 +27,12 @@ import {
   Padding,
   interpolatePlaceholder,
 } from './helpers';
-import {DISPLAYNAME_PREFIX} from '../../common/utils';
+import {DISPLAYNAME_PREFIX} from '../../constants';
 
-class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
+export default class TextInputFlat extends React.Component<
+  ChildTextInputProps,
+  {}
+> {
   public static displayName = `${DISPLAYNAME_PREFIX}.TextInputFlat`;
 
   public static readonly MINIMIZED_LABEL_Y_OFFSET = -18;
@@ -48,7 +51,7 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
     render: (props: RenderProps) => <NativeTextInput {...props} />,
   };
 
-  public render() {
+  public render(): any {
     const {
       disabled,
       editable,
@@ -156,184 +159,142 @@ class TextInputFlat extends React.Component<ChildTextInputProps, {}> {
       multiline && height ? 0 : !height ? minInputHeight / 2 : 0,
     );
 
-    if (height && typeof height !== 'number')
+    if (height && typeof height !== 'number') {
       // eslint-disable-next-line
-      console.warn('Currently we support only numbers in height prop');
+      {
+        console.warn('Currently we support only numbers in height prop');
+      }
 
-    const paddingSettings = {
-      height: height ? +height : null,
-      labelHalfHeight,
-      offset: TextInputFlat.INPUT_OFFSET,
-      multiline: multiline ? multiline : null,
-      dense: dense ? dense : null,
-      topPosition,
-      fontSize,
-      label,
-      scale: fontScale,
-      isAndroid: Platform.OS === 'android',
-      styles: StyleSheet.flatten(
-        dense ? styles.inputFlatDense : styles.inputFlat,
-      ) as Padding,
-    };
+      const paddingSettings = {
+        height: height ? +height : null,
+        labelHalfHeight,
+        offset: TextInputFlat.INPUT_OFFSET,
+        multiline: multiline ? multiline : null,
+        dense: dense ? dense : null,
+        topPosition,
+        fontSize,
+        label,
+        scale: fontScale,
+        isAndroid: Platform.OS === 'android',
+        styles: StyleSheet.flatten(
+          dense ? styles.inputFlatDense : styles.inputFlat,
+        ) as Padding,
+      };
 
-    const pad = calculatePadding(paddingSettings);
+      const pad = calculatePadding(paddingSettings);
 
-    const paddingFlat = adjustPaddingFlat({
-      ...paddingSettings,
-      pad,
-    });
+      const paddingFlat = adjustPaddingFlat({
+        ...paddingSettings,
+        pad,
+      });
 
-    const baseLabelTranslateY =
-      -labelHalfHeight - (topPosition + TextInputFlat.MINIMIZED_LABEL_Y_OFFSET);
+      const baseLabelTranslateY =
+        -labelHalfHeight -
+        (topPosition + TextInputFlat.MINIMIZED_LABEL_Y_OFFSET);
 
-    const placeholderOpacity = hasActiveOutline
-      ? interpolatePlaceholder(parentState.labeled, hasActiveOutline)
-      : parentState.labelLayout.measured
-      ? 1
-      : 0;
+      const placeholderOpacity = hasActiveOutline
+        ? interpolatePlaceholder(parentState.labeled, hasActiveOutline)
+        : parentState.labelLayout.measured
+        ? 1
+        : 0;
 
-    const labelProps = {
-      label,
-      onLayoutAnimatedText,
-      placeholderOpacity,
-      error,
-      placeholderStyle: styles.placeholder,
-      baseLabelTranslateY,
-      baseLabelTranslateX,
-      font,
-      fontSize,
-      fontWeight,
-      labelScale,
-      wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
-      topPosition,
-      paddingOffset,
-      hasActiveOutline,
-      activeColor,
-      placeholderColor,
-      errorColor,
-    };
+      const labelProps = {
+        label,
+        onLayoutAnimatedText,
+        placeholderOpacity,
+        error,
+        placeholderStyle: styles.placeholder,
+        baseLabelTranslateY,
+        baseLabelTranslateX,
+        font,
+        fontSize,
+        fontWeight,
+        labelScale,
+        wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
+        topPosition,
+        paddingOffset,
+        hasActiveOutline,
+        activeColor,
+        placeholderColor,
+        errorColor,
+      };
 
-    const minHeight =
-      height ||
-      (dense
-        ? label
-          ? TextInputFlat.MIN_DENSE_HEIGHT_WL
-          : TextInputFlat.MIN_DENSE_HEIGHT
-        : TextInputFlat.MIN_HEIGHT);
+      const minHeight =
+        height ||
+        (dense
+          ? label
+            ? TextInputFlat.MIN_DENSE_HEIGHT_WL
+            : TextInputFlat.MIN_DENSE_HEIGHT
+          : TextInputFlat.MIN_HEIGHT);
 
-    const flatHeight =
-      inputHeight +
-      (!height
-        ? dense
-          ? TextInputFlat.LABEL_PADDING_TOP_DENSE
-          : TextInputFlat.LABEL_PADDING_TOP
-        : 0);
+      const flatHeight =
+        inputHeight +
+        (!height
+          ? dense
+            ? TextInputFlat.LABEL_PADDING_TOP_DENSE
+            : TextInputFlat.LABEL_PADDING_TOP
+          : 0);
 
-    return (
-      <View style={[containerStyle, viewStyle]}>
-        <Underline
-          parentState={parentState}
-          underlineColorCustom={underlineColorCustom}
-          error={error}
-          colors={colors}
-          activeColor={activeColor}
-        />
-        <View
-          style={{
-            paddingTop: 0,
-            paddingBottom: 0,
-            minHeight,
-          }}>
-          <InputLabel parentState={parentState} labelProps={labelProps} />
+      return (
+        <View style={[containerStyle, viewStyle]}>
+          <Underline
+            parentState={parentState}
+            underlineColorCustom={underlineColorCustom}
+            error={error}
+            colors={colors}
+            activeColor={activeColor}
+          />
+          <View
+            style={{
+              paddingTop: 0,
+              paddingBottom: 0,
+              minHeight,
+            }}>
+            <InputLabel parentState={parentState} labelProps={labelProps} />
 
-          {render?.({
-            ...rest,
-            ref: innerRef,
-            onChangeText,
-            // @ts-ignore
-            placeholder: label
-              ? parentState.placeholder
-              : this.props.placeholder,
-            placeholderTextColor: placeholderColor,
-            editable: !disabled && editable,
-            selectionColor:
-              typeof selectionColor === 'undefined'
-                ? activeColor
-                : selectionColor,
-            onFocus,
-            onBlur,
-            underlineColorAndroid: 'transparent',
-            multiline,
-            style: [
-              styles.input,
-              paddingOffset,
-              !multiline || (multiline && height) ? {height: flatHeight} : {},
-              paddingFlat,
-              {
-                ...font,
-                fontSize,
-                fontWeight,
-                color: inputTextColor,
-                textAlignVertical: multiline ? 'top' : 'center',
-              },
-            ],
-          })}
+            {render?.({
+              ...rest,
+              ref: innerRef,
+              onChangeText,
+              // @ts-ignore
+              placeholder: label
+                ? parentState.placeholder
+                : this.props.placeholder,
+              placeholderTextColor: placeholderColor,
+              editable: !disabled && editable,
+              selectionColor:
+                typeof selectionColor === 'undefined'
+                  ? activeColor
+                  : selectionColor,
+              onFocus,
+              onBlur,
+              underlineColorAndroid: 'transparent',
+              multiline,
+              style: [
+                styles.input,
+                paddingOffset,
+                !multiline || (multiline && height) ? {height: flatHeight} : {},
+                paddingFlat,
+                {
+                  ...font,
+                  fontSize,
+                  fontWeight,
+                  color: inputTextColor,
+                  textAlignVertical: multiline ? 'top' : 'center',
+                },
+              ],
+            })}
+          </View>
         </View>
-      </View>
-    );
+      );
+    }
   }
 }
-
-export default TextInputFlat;
-
-type UnderlineProps = {
-  parentState: {
-    focused: boolean;
-  };
-  error?: boolean;
-  colors: {
-    error: string;
-  };
-  activeColor: string;
-  underlineColorCustom?: string;
-};
-
-const Underline = ({
-  parentState,
-  error,
-  colors,
-  activeColor,
-  underlineColorCustom,
-}: UnderlineProps) => {
-  let backgroundColor = parentState.focused
-    ? activeColor
-    : underlineColorCustom;
-  if (error) backgroundColor = colors.error;
-  return (
-    <Animated.View
-      style={[
-        styles.underline,
-        {
-          backgroundColor,
-          // Underlines is thinner when input is not focused
-          transform: [{scaleY: parentState.focused ? 1 : 0.5}],
-        },
-      ]}
-    />
-  );
-};
 
 const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     left: 0,
-  },
-  underline: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 2,
   },
   input: {
     flexGrow: 1,

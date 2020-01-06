@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet, StyleProp, TextStyle} from 'react-native';
 import StyledText from './StyledText';
 
 type Props = React.ComponentProps<typeof Text> & {
@@ -18,7 +18,7 @@ type Props = React.ComponentProps<typeof Text> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Title } from 'react-native-paper';
+ * import { Title } from '@hoflish/react-native-ui-kit';
  *
  * const MyComponent = () => (
  *   <Title>Title</Title>
@@ -32,7 +32,7 @@ const Title = (props: Props) => (
     {...props}
     alpha={0.87}
     family="medium"
-    style={[styles.text, props.style]}
+    style={[styles.text, props.style] as StyleProp<TextStyle>}
   />
 );
 

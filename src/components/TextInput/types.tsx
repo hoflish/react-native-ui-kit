@@ -1,9 +1,5 @@
-import {
-  TextInput as NativeTextInput,
-  Animated,
-  TextStyle,
-} from 'react-native';
-import { TextInputProps } from './TextInput';
+import {TextInput as NativeTextInput, Animated, TextStyle} from 'react-native';
+import {TextInputProps} from './TextInput';
 
 export type RenderProps = {
   ref: (r: NativeTextInput | null | undefined) => void;
@@ -30,7 +26,7 @@ export type State = {
   focused: boolean;
   placeholder: string | null | undefined;
   value: string | null | undefined;
-  labelLayout: { measured: boolean; width: number; height: number };
+  labelLayout: {measured: boolean; width: number; height: number};
 };
 
 export type ChildTextInputProps = {
@@ -54,7 +50,7 @@ export type LabelProps = {
   fontWeight: TextStyle['fontWeight'];
   font: any;
   topPosition: number;
-  paddingOffset?: { paddingHorizontal: number } | null | undefined;
+  paddingOffset?: {paddingHorizontal: number} | null | undefined;
   placeholderColor: string | null | undefined;
   backgroundColor?: string | null | undefined;
   label?: string | null | undefined;

@@ -1,10 +1,9 @@
 import React from 'react';
-import {View} from 'react-native';
-import Config from './Config';
-import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {View, StyleSheet} from 'react-native';
+import {DISPLAYNAME_PREFIX} from '../constants';
 import {withTheme} from '../core/theming';
 import Icon from './Icon';
-import Touchable from "./Touchable";
+import Touchable from './Touchable';
 import Avatar, {AvatarProps} from './Avatar';
 
 interface AvatarEditProps extends AvatarProps {
@@ -17,9 +16,11 @@ interface AvatarEditProps extends AvatarProps {
 class AvatarEdit extends React.Component<AvatarEditProps> {
   public static displayName = `${DISPLAYNAME_PREFIX}.AvatarEdit`;
 
+  public static readonly IMAGE_SIZE = 60;
+
   public static defaultProps = {
     onPress: () => {},
-    size: Config.avatarImageSize,
+    size: AvatarEdit.IMAGE_SIZE,
   };
 
   public render() {
@@ -50,16 +51,15 @@ class AvatarEdit extends React.Component<AvatarEditProps> {
         <View>
           <Avatar source={source} size={size} />
           <View
-            style={{
-              position: 'absolute',
-              bottom: 2,
-              right: -8,
-              borderWidth: 2,
-              borderColor: colorStyles.editBorderColor,
-              backgroundColor: colorStyles.editBackgroundColor,
-              borderRadius: size * (3 / 10),
-              padding: size * (3 / 32),
-            }}>
+            style={[
+              styles.iconWrapper,
+              {
+                borderColor: colorStyles.editBorderColor,
+                backgroundColor: colorStyles.editBackgroundColor,
+                borderRadius: size * (3 / 10),
+                padding: size * (3 / 32),
+              },
+            ]}>
             <Icon
               name="photo-camera"
               color={colorStyles.editIconColor}
@@ -71,5 +71,14 @@ class AvatarEdit extends React.Component<AvatarEditProps> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  iconWrapper: {
+    position: 'absolute',
+    bottom: 2,
+    right: -8,
+    borderWidth: 2,
+  },
+});
 
 export default withTheme(AvatarEdit);

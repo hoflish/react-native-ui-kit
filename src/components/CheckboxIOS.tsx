@@ -1,9 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import Icon from './Icon';
-import {withTheme} from '../core/theming';
-import {DISPLAYNAME_PREFIX} from '../common/utils';
-import Touchable from "./Touchable";
+import {DISPLAYNAME_PREFIX} from '../constants';
+import Touchable from './Touchable';
 import {CheckboxProps} from './Checkbox';
 
 class CheckboxIOS extends React.Component<CheckboxProps> {
@@ -18,11 +17,13 @@ class CheckboxIOS extends React.Component<CheckboxProps> {
       color,
       disabled,
       onPress,
-      theme,
+      theme: {colors, disabledOpacity},
       ...rest
     } = this.props;
-    const checkedColor = color || theme.colors.primary;
+    const checkedColor = color || colors.primary;
     const icon = indeterminate ? 'remove' : 'done';
+    const opacity = disabled ? disabledOpacity : 1;
+    const borderWidth = checked ? 0 : 2;
 
     return (
       <Touchable
@@ -37,21 +38,14 @@ class CheckboxIOS extends React.Component<CheckboxProps> {
         style={[
           styles.container,
           {
-            backgroundColor: checked ? checkedColor : theme.colors.surface,
-            borderColor: theme.colors.light,
-            borderWidth: checked ? 0 : 2,
-            opacity: disabled ? theme.disabledOpacity : 1,
+            backgroundColor: checked ? checkedColor : colors.surface,
+            borderColor: colors.light,
+            borderWidth,
+            opacity,
           },
         ]}>
-        <View
-          style={{
-            opacity: indeterminate || disabled ? theme.disabledOpacity : 1,
-          }}>
-          <Icon
-            name={icon}
-            size={CheckboxIOS.SIZE}
-            color={theme.colors.surface}
-          />
+        <View style={{opacity}}>
+          <Icon name={icon} size={CheckboxIOS.SIZE} color={colors.surface} />
         </View>
       </Touchable>
     );
@@ -66,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(CheckboxIOS);
+export default CheckboxIOS;

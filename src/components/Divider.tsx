@@ -4,7 +4,7 @@ import color from 'color';
 import {Theme} from '../types';
 import {useTheme} from '../core/theming';
 import {black, white} from '../styles/colors';
-import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {DISPLAYNAME_PREFIX} from '../constants';
 import Config from './Config';
 
 interface Props {
@@ -29,14 +29,16 @@ const Divider: React.FC<Props> = ({inset, style, ...rest}) => {
   return (
     <View
       {...rest}
-      style={[
-        {
-          height: StyleSheet.hairlineWidth,
-          backgroundColor,
-        },
-        inset && styles.inset,
-        style,
-      ]}
+      style={
+        [
+          {
+            height: StyleSheet.hairlineWidth,
+            backgroundColor,
+          },
+          inset && styles.inset,
+          style,
+        ] as StyleProp<ViewStyle>
+      }
     />
   );
 };

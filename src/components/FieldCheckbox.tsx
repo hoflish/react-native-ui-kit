@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, AccessibilityState} from 'react-native';
 import color from 'color';
 
-import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {DISPLAYNAME_PREFIX} from '../constants';
 import {withTheme} from '../core/theming';
 import Touchable from './Touchable';
 import Checkbox from './Checkbox';
@@ -71,6 +71,11 @@ class FieldCheckbox extends React.Component<Props> {
         .string();
     }
 
+    const _accessibilityState: AccessibilityState = {
+      disabled: !!disabled,
+      checked: !!checked,
+    };
+
     return (
       <Touchable
         onPress={this.onPress}
@@ -78,9 +83,7 @@ class FieldCheckbox extends React.Component<Props> {
         accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
         accessibilityComponentType="button"
         accessibilityRole="checkbox"
-        accessibilityStates={
-          disabled ? 'disabled' : checked ? 'checked' : 'unchecked'
-        }
+        accessibilityState={_accessibilityState}
         accessibilityLiveRegion="polite">
         <View style={styles.container}>
           <Checkbox

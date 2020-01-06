@@ -6,7 +6,7 @@ import {
   ViewStyle,
   TouchableHighlight,
 } from 'react-native';
-import {DISPLAYNAME_PREFIX} from '../common/utils';
+import {DISPLAYNAME_PREFIX} from '../constants';
 import Icon from './Icon';
 import Config from './Config';
 import {Theme} from '../types';
@@ -63,7 +63,9 @@ class Rating extends React.Component<Props, State> {
 
   private _onRate = (index: number): void => {
     const {onPress} = this.props;
-    if (typeof onPress === 'function') onPress(index);
+    if (typeof onPress === 'function') {
+      onPress(index);
+    }
 
     this.setState({rating: index});
   };
@@ -82,8 +84,8 @@ class Rating extends React.Component<Props, State> {
     const ratingRounded = Math.round(rating * 2) / 2;
 
     return (
-      <View style={[styles.container, style]}>
-        {[...Array(max)].map((v, i) => (
+      <View style={[styles.container, style] as StyleProp<ViewStyle>}>
+        {[...Array(max)].map((_, i) => (
           <TouchableHighlight
             style={{width: size, height: size}}
             accessibilityLabel={`${i + 1} stars`}

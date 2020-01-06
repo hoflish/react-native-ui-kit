@@ -9,17 +9,17 @@ import {
 } from 'react-native';
 import color from 'color';
 
-import {DISPLAYNAME_PREFIX} from '../../common/utils';
+import {DISPLAYNAME_PREFIX} from '../../constants';
 import InputLabel from './Label/InputLabel';
 import LabelBackground from './Label/LabelBackground';
+import Outline from './Outline';
 import {RenderProps, ChildTextInputProps} from './types';
-import {Theme} from '../../types';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
   LABEL_WIGGLE_X_OFFSET,
-} from './constants';
+} from './_constants';
 
 import {
   calculateLabelTopPosition,
@@ -30,7 +30,10 @@ import {
   interpolatePlaceholder,
 } from './helpers';
 
-class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
+export default class TextInputOutlined extends React.Component<
+  ChildTextInputProps,
+  {}
+> {
   public static displayName = `${DISPLAYNAME_PREFIX}.TextInputOutlined`;
 
   public static readonly OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
@@ -47,14 +50,14 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
     render: (props: RenderProps) => <NativeTextInput {...props} />,
   };
 
-  render() {
+  public render(): any {
     const {
       disabled,
       editable,
       label,
       error,
       selectionColor,
-      underlineColor,
+      // underlineColor,
       dense,
       style,
       theme,
@@ -133,175 +136,139 @@ class TextInputOutlined extends React.Component<ChildTextInputProps, {}> {
       TextInputOutlined.LABEL_PADDING_TOP,
     );
 
-    if (height && typeof height !== 'number')
+    if (height && typeof height !== 'number') {
       // eslint-disable-next-line
-      console.warn('Currently we support only numbers in height prop');
+      {
+        console.warn('Currently we support only numbers in height prop');
+      }
 
-    const paddingSettings = {
-      height: height ? +height : null,
-      labelHalfHeight,
-      offset: TextInputOutlined.LABEL_PADDING_TOP,
-      multiline: multiline ? multiline : null,
-      dense: dense ? dense : null,
-      topPosition,
-      fontSize,
-      label,
-      scale: fontScale,
-      isAndroid: Platform.OS === 'android',
-      styles: StyleSheet.flatten(
-        dense ? styles.inputOutlinedDense : styles.inputOutlined,
-      ) as Padding,
-    };
+      const paddingSettings = {
+        height: height ? +height : null,
+        labelHalfHeight,
+        offset: TextInputOutlined.LABEL_PADDING_TOP,
+        multiline: multiline ? multiline : null,
+        dense: dense ? dense : null,
+        topPosition,
+        fontSize,
+        label,
+        scale: fontScale,
+        isAndroid: Platform.OS === 'android',
+        styles: StyleSheet.flatten(
+          dense ? styles.inputOutlinedDense : styles.inputOutlined,
+        ) as Padding,
+      };
 
-    const pad = calculatePadding(paddingSettings);
+      const pad = calculatePadding(paddingSettings);
 
-    const paddingOut = adjustPaddingOut({...paddingSettings, pad});
+      const paddingOut = adjustPaddingOut({...paddingSettings, pad});
 
-    const baseLabelTranslateY =
-      -labelHalfHeight -
-      (topPosition + TextInputOutlined.OUTLINE_MINIMIZED_LABEL_Y_OFFSET);
+      const baseLabelTranslateY =
+        -labelHalfHeight -
+        (topPosition + TextInputOutlined.OUTLINE_MINIMIZED_LABEL_Y_OFFSET);
 
-    const placeholderOpacity = interpolatePlaceholder(
-      parentState.labeled,
-      hasActiveOutline,
-    );
+      const placeholderOpacity = interpolatePlaceholder(
+        parentState.labeled,
+        hasActiveOutline,
+      );
 
-    const labelProps = {
-      label,
-      onLayoutAnimatedText,
-      placeholderOpacity,
-      error,
-      placeholderStyle: styles.placeholder,
-      baseLabelTranslateY,
-      baseLabelTranslateX,
-      font,
-      fontSize,
-      fontWeight,
-      labelScale,
-      wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
-      topPosition,
-      hasActiveOutline,
-      activeColor,
-      placeholderColor,
-      backgroundColor,
-      errorColor,
-    };
+      const labelProps = {
+        label,
+        onLayoutAnimatedText,
+        placeholderOpacity,
+        error,
+        placeholderStyle: styles.placeholder,
+        baseLabelTranslateY,
+        baseLabelTranslateX,
+        font,
+        fontSize,
+        fontWeight,
+        labelScale,
+        wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
+        topPosition,
+        hasActiveOutline,
+        activeColor,
+        placeholderColor,
+        backgroundColor,
+        errorColor,
+      };
 
-    const minHeight =
-      height ||
-      (dense
-        ? TextInputOutlined.MIN_DENSE_HEIGHT
-        : TextInputOutlined.MIN_HEIGHT);
+      const minHeight =
+        height ||
+        (dense
+          ? TextInputOutlined.MIN_DENSE_HEIGHT
+          : TextInputOutlined.MIN_HEIGHT);
 
-    return (
-      <View style={[containerStyle, viewStyle]}>
-        {/* 
+      return (
+        <View style={[containerStyle, viewStyle]}>
+          {/*
           Render the outline separately from the container
           This is so that the label can overlap the outline
-          Otherwise the border will cut off the label on Android 
+          Otherwise the border will cut off the label on Android
           */}
-        <View>
-          <Outline
-            theme={theme}
-            hasActiveOutline={hasActiveOutline}
-            activeColor={activeColor}
-            outlineColor={outlineColor}
-            backgroundColor={backgroundColor}
-          />
-          <View
-            style={{
-              paddingTop: TextInputOutlined.LABEL_PADDING_TOP,
-              paddingBottom: 0,
-              minHeight,
-            }}>
-            <InputLabel
-              parentState={parentState}
-              labelProps={labelProps}
-              labelBackground={LabelBackground}
+          <View>
+            <Outline
+              theme={theme}
+              hasActiveOutline={hasActiveOutline}
+              activeColor={activeColor}
+              outlineColor={outlineColor}
+              backgroundColor={backgroundColor}
             />
-
-            {render({
-              ...rest,
-              ref: innerRef,
-              onChangeText,
-              placeholder: label
-                ? parentState.placeholder
-                : this.props.placeholder,
-              placeholderTextColor: placeholderColor,
-              editable: !disabled && editable,
-              selectionColor:
-                typeof selectionColor === 'undefined'
-                  ? activeColor
-                  : selectionColor,
-              onFocus,
-              onBlur,
-              underlineColorAndroid: 'transparent',
-              multiline,
-              style: [
-                styles.input,
-                !multiline || (multiline && height)
-                  ? {height: inputHeight}
-                  : {},
-                paddingOut,
-                {
-                  ...font,
-                  fontSize,
-                  fontWeight,
-                  color: inputTextColor,
-                  textAlignVertical: multiline ? 'top' : 'center',
-                },
-              ],
-            } as RenderProps)}
+            <View
+              style={{
+                paddingTop: TextInputOutlined.LABEL_PADDING_TOP,
+                paddingBottom: 0,
+                minHeight,
+              }}>
+              <InputLabel
+                parentState={parentState}
+                labelProps={labelProps}
+                labelBackground={LabelBackground}
+              />
+              {render({
+                ...rest,
+                ref: innerRef,
+                onChangeText,
+                placeholder: label
+                  ? parentState.placeholder
+                  : this.props.placeholder,
+                placeholderTextColor: placeholderColor,
+                editable: !disabled && editable,
+                selectionColor:
+                  typeof selectionColor === 'undefined'
+                    ? activeColor
+                    : selectionColor,
+                onFocus,
+                onBlur,
+                underlineColorAndroid: 'transparent',
+                multiline,
+                style: [
+                  styles.input,
+                  !multiline || (multiline && height)
+                    ? {height: inputHeight}
+                    : {},
+                  paddingOut,
+                  {
+                    ...font,
+                    fontSize,
+                    fontWeight,
+                    color: inputTextColor,
+                    textAlignVertical: multiline ? 'top' : 'center',
+                  },
+                ],
+              } as RenderProps)}
+            </View>
           </View>
         </View>
-      </View>
-    );
+      );
+    }
   }
 }
-
-export default TextInputOutlined;
-
-type OutlineType = {
-  activeColor: string;
-  hasActiveOutline: boolean | undefined;
-  outlineColor: string | undefined;
-  backgroundColor: string | undefined;
-  theme: Theme;
-};
-
-const Outline = ({
-  theme,
-  hasActiveOutline,
-  activeColor,
-  outlineColor,
-  backgroundColor,
-}: OutlineType) => (
-  <View
-    pointerEvents="none"
-    style={[
-      styles.outline,
-      {
-        backgroundColor,
-        borderRadius: theme.borderRadius.global,
-        borderWidth: hasActiveOutline ? 2 : 1,
-        borderColor: hasActiveOutline ? activeColor : outlineColor,
-      },
-    ]}
-  />
-);
 
 const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     left: 0,
     paddingHorizontal: TextInputOutlined.INPUT_PADDING_HORIZONTAL,
-  },
-  outline: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 6,
-    bottom: 0,
   },
   input: {
     flexGrow: 1,

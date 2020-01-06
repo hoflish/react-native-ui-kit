@@ -1,4 +1,4 @@
-import { Animated } from 'react-native';
+import {Animated} from 'react-native';
 
 type PaddingProps = {
   height: number | null;
@@ -11,19 +11,19 @@ type PaddingProps = {
   scale: number;
   offset: number;
   isAndroid: boolean;
-  styles: { paddingTop: number; paddingBottom: number };
+  styles: {paddingTop: number; paddingBottom: number};
 };
 
 type AdjProps = PaddingProps & {
   pad: number;
 };
 
-export type Padding = { paddingTop: number; paddingBottom: number };
+export type Padding = {paddingTop: number; paddingBottom: number};
 
 export const calculateLabelTopPosition = (
   labelHeight: number,
   height: number = 0,
-  optionalPadding: number = 0
+  optionalPadding: number = 0,
 ): number => {
   const customHeight = height > 0 ? height : 0;
 
@@ -33,16 +33,18 @@ export const calculateLabelTopPosition = (
 export const calculateInputHeight = (
   labelHeight: number,
   height: any = 0,
-  minHeight: number
+  minHeight: number,
 ): number => {
   const finalHeight = height > 0 ? height : labelHeight;
 
-  if (height > 0) return height;
+  if (height > 0) {
+    return height;
+  }
   return finalHeight < minHeight ? minHeight : finalHeight;
 };
 
 export const calculatePadding = (props: PaddingProps): number => {
-  const { height, multiline = false } = props;
+  const {height, multiline = false} = props;
 
   let result = 0;
 
@@ -58,7 +60,7 @@ export const calculatePadding = (props: PaddingProps): number => {
 };
 
 const calculateTextAreaPadding = (props: PaddingProps) => {
-  const { dense } = props;
+  const {dense} = props;
 
   return dense ? 10 : 20;
 };
@@ -80,8 +82,9 @@ const calculateInputPadding = ({
     Math.floor((refFontSize - fontSize) / 2) -
     (scale < 1 ? offset / 2 : 0);
 
-  if (multiline && isAndroid)
+  if (multiline && isAndroid) {
     result = Math.min(dense ? offset / 2 : offset, result);
+  }
 
   return result;
 };
@@ -126,7 +129,7 @@ export const adjustPaddingOut = ({
     }
     result = Math.floor(result);
   }
-  return { paddingTop: result, paddingBottom: result };
+  return {paddingTop: result, paddingBottom: result};
 };
 
 export const adjustPaddingFlat = ({
@@ -144,17 +147,17 @@ export const adjustPaddingFlat = ({
   let result = pad;
   let topResult = result;
   let bottomResult = result;
-  const { paddingTop, paddingBottom } = styles;
+  const {paddingTop, paddingBottom} = styles;
   const refFontSize = scale * fontSize;
 
   if (!multiline) {
     // do not modify padding if input is not multiline
     if (label) {
       // return const style for flat input with label
-      return { paddingTop, paddingBottom };
+      return {paddingTop, paddingBottom};
     }
     // return pad for flat input without label
-    return { paddingTop: result, paddingBottom: result };
+    return {paddingTop: result, paddingBottom: result};
   }
 
   if (label) {
@@ -215,7 +218,7 @@ export const adjustPaddingFlat = ({
 
 export const interpolatePlaceholder = (
   labeled: Animated.Value,
-  hasActiveOutline: boolean | undefined
+  hasActiveOutline: boolean | undefined,
 ) =>
   labeled.interpolate({
     inputRange: [0, 1],

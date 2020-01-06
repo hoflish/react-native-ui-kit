@@ -19,7 +19,7 @@ type Props = React.ComponentProps<typeof Text> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Caption } from 'react-native-paper';
+ * import { Caption } from '@hoflish/react-native-ui-kit';
  *
  * const MyComponent = () => (
  *   <Caption>Caption</Caption>
@@ -33,11 +33,9 @@ const Caption = (props: Props) => (
     {...props}
     alpha={0.54}
     family="regular"
-    style={[styles.text, props.style]}
+    style={[styles.text, props.style] as StyleProp<TextStyle>}
   />
 );
-
-export default Caption;
 
 const styles = StyleSheet.create({
   text: {
@@ -47,3 +45,5 @@ const styles = StyleSheet.create({
     letterSpacing: 0.4,
   },
 });
+
+export default Caption;
