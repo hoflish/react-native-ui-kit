@@ -23,8 +23,5 @@
     "strict": true,
     "target": "esnext"
   },
-  "exclude": [
-    "lib/**/*",
-    "storybook/*/**"
-  ]
+  "exclude": ["lib/**/*"]
 }
